@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#54D1D1D1"
+    android:backgroundTint="#54604E4E"
+    android:backgroundTintMode="add"
+    tools:context=".ui.home.HomeFragment">
+
+    <TextView
+        android:id="@+id/textHome"
+        android:layout_width="match_parent"
+        android:layout_height="701dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="invisible" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:orientation="vertical">
+
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="23dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="81dp"
+                android:orientation="horizontal">
+
+                <Space
+                    android:layout_width="25dp"
+                    android:layout_height="match_parent" />
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="66dp"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerInside"
+                    android:visibility="visible"
+                    app:srcCompat="@mipmap/perfil"
+                    tools:src="@mipmap/perfil" />
+
+                <Space
+                    android:layout_width="11dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <Space
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:layout_weight="1" />
+
+                    <TextView
+                        android:id="@+id/nombre_perfil"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/Nombre_Usuario"
+                        android:textSize="20dp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="19dp"
+                android:backgroundTint="@android:color/darker_gray"
+                android:visibility="visible" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="10dp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="datos"
+                    android:textSize="80sp" />
+
+                <TextView
+                    android:id="@+id/textView4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textSize="80sp"
+                    tools:text="servicios inf" />
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="favoritos"
+                    android:textSize="80sp" />
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="opciones"
+                    android:textSize="80sp" />
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="salir"
+                    android:textSize="80sp" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>

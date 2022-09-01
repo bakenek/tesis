@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">tesis</string>
+    <string name="title_home">Perfil</string>
+    <string name="title_dashboard">Principal</string>
+    <string name="title_notifications">Notificationes</string>
+    <string name="title_actividad" >Actividad</string>
+    <string name="Nombre_Usuario" >Usuario</string>
+</resources>
