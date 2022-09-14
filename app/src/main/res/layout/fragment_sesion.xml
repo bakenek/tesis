@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".SesionFragment">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#E7FBF7"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,8 +88,20 @@
             android:layout_height="37dp"
             android:layout_gravity="center"
             android:backgroundTint="#FFFFFF"
+            android:drawableTint="#FFFFFF"
+            android:foregroundTint="#FFFFFF"
+            android:outlineAmbientShadowColor="@color/white"
+            android:outlineSpotShadowColor="@color/white"
+            android:shadowColor="#FFFFFF"
             android:text="Crear cuenta"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/purple_500" />
     </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/hello_blank_fragment"
+        android:visibility="invisible" />
+
 </android.support.constraint.ConstraintLayout>

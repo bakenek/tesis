@@ -31,6 +31,14 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
+
+        //setContentView(R.layout.activity_main);
+       //  FragmentManager fm = getSupportFragmentManager();
+        //fm.beginTransaction().replace(R.id.containerPrincipal, new SesionFragment()).commit();
     }
 
 }
+
+
+
+
