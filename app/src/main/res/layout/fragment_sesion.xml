@@ -47,7 +47,7 @@
             android:layout_height="20dp" />
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/editTextTextPersonpwd"
             android:layout_width="318dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -61,7 +61,7 @@
             android:layout_height="50dp" />
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/btnIniciarSesion"
             android:layout_width="228dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -95,7 +95,8 @@
             android:shadowColor="#FFFFFF"
             android:text="Crear cuenta"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            android:textColor="@color/purple_500" />
+            android:textColor="@color/purple_500"
+            tools:ignore="TouchTargetSizeCheck" />
     </LinearLayout>
 
     <TextView
