@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "756416853045",
+    "project_id": "tesis-johanluis",
+    "storage_bucket": "tesis-johanluis.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:756416853045:android:b34846482c7db8671a6d7c",
+        "android_client_info": {
+          "package_name": "com.example.tesis"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "756416853045-s6im47hhvvl4ikicmq8i0i918nchnmuv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBO0eKANadHY38oFfbSnXWy1SZG-CB2Ck"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "756416853045-s6im47hhvvl4ikicmq8i0i918nchnmuv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

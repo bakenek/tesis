@@ -1,9 +1,9 @@
 package com.example.tesis;
 
 import android.os.Bundle;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import androidx.fragment.app.FragmentManager;
+import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -33,10 +33,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        //setContentView(R.layout.activity_main);
-        setContentView(R.layout.vacio);
-       FragmentManager fm = getSupportFragmentManager();
-        fm.beginTransaction().replace(R.id.fondo, new SesionFragment()).commit();
+
+
     }
 
 }
