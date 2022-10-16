@@ -17,6 +17,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -24,28 +25,31 @@ import java.util.Map;
 
 public class First_layout extends AppCompatActivity {
 
-
-
     EditText cajauser, cajapwd;
-    Button btnsesion;
+
+    Button btnsesion , btncuentas;
+
     FirebaseAuth mAuth;
     FirebaseFirestore mFirestore;
-
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_sesion);
 
+        getSupportActionBar().setTitle("Inicio");
 
         cajauser = (EditText) findViewById(R.id.editTextTextPersonName);
         cajapwd = (EditText) findViewById(R.id.editTextTextPersonpwd);
+
         btnsesion = (Button) findViewById(R.id.btnIniciarSesion);
+        btncuentas = (Button) findViewById(R.id.btncrear);
 
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
+
+
+
 
 
         btnsesion.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +57,7 @@ public class First_layout extends AppCompatActivity {
             public void onClick(View v) {
                 String emailuser = cajauser.getText().toString().trim();
                 String pasword = cajapwd.getText().toString().trim();
-                String nameuser= "johan";
+
 
                 if(emailuser.isEmpty() && pasword.isEmpty()){
 
@@ -62,7 +66,7 @@ public class First_layout extends AppCompatActivity {
 
 
                 }else {
-                    registerUser(nameuser,emailuser,pasword);
+                    loginUser(emailuser,pasword);
 
                 }
 
@@ -71,56 +75,66 @@ public class First_layout extends AppCompatActivity {
 
         });
 
+        btncuentas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                finish();
+                startActivity(new Intent(First_layout.this,Registrar.class));
+            }
+        });
+
+
         // Inflate the layout for this fragment
         // return inflater.inflate(R.layout.fragment_sesion, container, false);
 
     }
 
-    private void registerUser(String nameuser, String emailuser, String pasword) {
-        mAuth.createUserWithEmailAndPassword(emailuser,pasword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                String id = mAuth.getCurrentUser().getUid();
-                Map<String,Object> map = new HashMap<>();
-                map.put("id", id);
-                map.put("nombre", nameuser);
-                map.put("correo", emailuser);
-                map.put("clave", pasword);
+    private void loginUser( String emailuser, String pasword) {
+      mAuth.signInWithEmailAndPassword(emailuser,pasword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+          @Override
+          public void onComplete(@NonNull Task<AuthResult> task) {
+              if(task.isSuccessful()){
 
-                mFirestore.collection("user").document(id).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
+                  finish();
+                  startActivity(new Intent(First_layout.this, MainActivity.class ));
 
-                        Toast.makeText(First_layout.this,"Usuario registrado " +
-                                cajauser.getText().toString(),Toast.LENGTH_SHORT).show();
+                  Toast.makeText(First_layout.this,"Bienvenido " +
+                          cajauser.getText().toString(),Toast.LENGTH_SHORT).show();
 
-                        finish();
+              }else{
 
-                        startActivity(new Intent(First_layout.this,MainActivity.class));
+                  Toast.makeText(First_layout.this,"Error" +
+                          cajauser.getText().toString(),Toast.LENGTH_SHORT).show();
 
+              }
 
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(First_layout.this,"Error al guardar " +
-                                cajauser.getText().toString(),Toast.LENGTH_SHORT).show();
-                    }
-                });
+          }
+      }).addOnFailureListener(new OnFailureListener() {
+          @Override
+          public void onFailure(@NonNull Exception e) {
+
+              Toast.makeText(First_layout.this,"Error al iniciar sesion " +
+                      cajauser.getText().toString(),Toast.LENGTH_SHORT).show();
+          }
+      });
 
 
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(First_layout.this,"Error al registrar" +
-                        cajauser.getText().toString(),Toast.LENGTH_SHORT).show();
 
-            }
-        });
 
     }
 
+   @Override
+   protected void onStart() {
+        super.onStart();
+       FirebaseUser user = mAuth.getCurrentUser();
+       if(user != null){
+
+       startActivity(new Intent(First_layout.this,MainActivity.class));
+       finish();
+
+  }
+    }
 
 
 }
