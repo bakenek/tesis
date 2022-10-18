@@ -111,12 +111,14 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView8"
+                <Button
+                    android:id="@+id/datosdeusuatio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="datos"
-                    android:textSize="80sp" />
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/white"
+                    android:text="Perfil"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/textView4"
@@ -146,7 +148,7 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/white"
                     android:text="Cerrar Sesion"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
             </LinearLayout>
         </ScrollView>

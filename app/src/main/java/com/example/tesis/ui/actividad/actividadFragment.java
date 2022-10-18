@@ -75,7 +75,7 @@ public class actividadFragment extends Fragment {
                 new FirestoreRecyclerOptions.Builder<Servicio>().setQuery(query.orderBy("iddelcreador").startAt(b).endAt(b)
                         , Servicio.class).build();
 
-        mAdapter = new ServicioAdapter(firestoreRecyclerOptions);
+        mAdapter = new ServicioAdapter(firestoreRecyclerOptions , getActivity());
         mAdapter.notifyDataSetChanged();
         mRecycler.setAdapter(mAdapter);
 

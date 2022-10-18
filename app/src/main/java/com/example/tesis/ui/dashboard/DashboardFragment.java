@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,11 +30,14 @@ public class DashboardFragment extends Fragment {
     private DashboardViewModel dashboardViewModel;
     private FragmentDashboardBinding binding;
 
+
+
     RecyclerView mRecycler;
     ServicioAdapterdasboard mAdapter;
 
     FirebaseAuth mAuth;
     FirebaseFirestore mFirestore;
+    View v;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -52,6 +56,7 @@ public class DashboardFragment extends Fragment {
         });
 
 
+
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
         mRecycler = root.findViewById(R.id.RecyclerViewServiciosdasboard);
@@ -61,9 +66,10 @@ public class DashboardFragment extends Fragment {
         FirestoreRecyclerOptions<Servicio> firestoreRecyclerOptions =
                 new FirestoreRecyclerOptions.Builder<Servicio>().setQuery(query.orderBy("iddelcreador"), Servicio.class).build();
 
-        mAdapter = new ServicioAdapterdasboard(firestoreRecyclerOptions);
+        mAdapter = new ServicioAdapterdasboard(firestoreRecyclerOptions,getActivity());
         mAdapter.notifyDataSetChanged();
         mRecycler.setAdapter(mAdapter);
+
 
 
 
