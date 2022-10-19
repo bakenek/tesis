@@ -11,14 +11,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Tesis">
         <activity
-            android:name=".ViewActivityDashboard"
-            android:exported="false">
+            android:name=".ui.dashboard.ViewActivityDashboard"
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".MainActivity"
+            android:exported="true"
+            android:label="@string/app_name"></activity>
+        <activity
+            android:name=".ActualizarUsuario"
             android:exported="true"
             android:label="@string/app_name"></activity>
         <activity

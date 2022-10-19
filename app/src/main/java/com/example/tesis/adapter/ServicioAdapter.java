@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tesis.AgregarServicio;
 import com.example.tesis.MainActivity;
 import com.example.tesis.R;
 import com.example.tesis.model.Servicio;
@@ -62,11 +63,10 @@ public class ServicioAdapter extends FirestoreRecyclerAdapter<Servicio,ServicioA
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(activity, //ViewActivityDashboard.class
-                        MainActivity.class);
+                Intent i = new Intent(activity, AgregarServicio.class);
                 i.putExtra("id_servicio", id);
                 activity.startActivity(i);
-                Toast.makeText(activity, id, Toast.LENGTH_SHORT).show();
+
 
             }
         });

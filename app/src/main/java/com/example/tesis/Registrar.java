@@ -32,14 +32,14 @@ public class Registrar extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseFirestore mFirestore;
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registro_perfil);
 
         getSupportActionBar().setTitle("Registro");
-
-
 
         cajauser = (EditText) findViewById(R.id.edittextusuario);
         cajapwd = (EditText) findViewById(R.id.edittextclave);
@@ -52,41 +52,48 @@ public class Registrar extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
 
-        btnregresar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                finish();
-                startActivity(new Intent(Registrar.this,First_layout.class));
 
-            }
-        });
 
-        btnregistrar.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
+            btnregresar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                String nameuser = cajauser.getText().toString().trim();
-                String emailuser = cajaemail.getText().toString().trim();
-                String pasword = cajapwd.getText().toString().trim();
-                String contacto = cajacontacto.getText().toString().trim();
-
-                if(emailuser.isEmpty() && pasword.isEmpty()  && nameuser.isEmpty()  && contacto.isEmpty()){
-
-                    Toast.makeText(Registrar.this,"Complete los datos " +
-                            cajauser.getText().toString(),Toast.LENGTH_SHORT).show();
-
-                }else {
-
-                    registerUser(nameuser,emailuser,pasword,contacto);
+                    finish();
+                    startActivity(new Intent(Registrar.this, First_layout.class));
 
                 }
-            }
-        });
-    }
+            });
 
-    private void registerUser(String nameuser, String emailuser, String pasword,String contacto) {
+            btnregistrar.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+
+                    String nameuser = cajauser.getText().toString().trim();
+                    String emailuser = cajaemail.getText().toString().trim();
+                    String pasword = cajapwd.getText().toString().trim();
+                    String contacto = cajacontacto.getText().toString().trim();
+
+                    if (emailuser.isEmpty() && pasword.isEmpty() && nameuser.isEmpty() && contacto.isEmpty()) {
+
+                        Toast.makeText(Registrar.this, "Complete los datos " +
+                                cajauser.getText().toString(), Toast.LENGTH_SHORT).show();
+
+                    } else {
+
+                        registerUser(nameuser, emailuser, pasword, contacto);
+
+                    }
+                }
+            });
+
+
+        }
+
+
+    public void registerUser(String nameuser, String emailuser, String pasword,String contacto) {
         mAuth.createUserWithEmailAndPassword(emailuser,pasword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -99,7 +106,8 @@ public class Registrar extends AppCompatActivity {
                 map.put("clave", pasword);
                 map.put("contacto", contacto);
 
-                mFirestore.collection("user").document(id).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+                mFirestore.collection("user").document(id).set(map)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
 
@@ -129,6 +137,7 @@ public class Registrar extends AppCompatActivity {
             }
         });
     }
-
-
 }
+
+
+

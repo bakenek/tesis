@@ -15,6 +15,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
@@ -32,6 +33,8 @@ public class AgregarServicio extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseFirestore mFirestore;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,33 +45,104 @@ public class AgregarServicio extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
+        String id = getIntent().getStringExtra("id_servicio");
 
         nombre = (EditText) findViewById(R.id.edittextNombreServicio);
         descripcion = (EditText) findViewById(R.id.edittextDescripcionServicio);
 
         CrearServicio = (Button) findViewById(R.id.btnCrearServicio);
 
-        CrearServicio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                String nombreServicio = nombre.getText().toString().trim();
-                String descripcionServicio = descripcion.getText().toString().trim();
+        if(id == null || id == ""){
 
-                if(nombreServicio.isEmpty() && descripcionServicio.isEmpty()){
+            CrearServicio.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                    Toast.makeText(AgregarServicio.this, "Ingresa los Datos", Toast.LENGTH_SHORT).show();
+                    String nombreServicio = nombre.getText().toString().trim();
+                    String descripcionServicio = descripcion.getText().toString().trim();
 
-                }else{
+                    if(nombreServicio.isEmpty() && descripcionServicio.isEmpty()){
 
-                     agregarservicio(nombreServicio,descripcionServicio);
+                        Toast.makeText(AgregarServicio.this, "Ingresa los Datos", Toast.LENGTH_SHORT).show();
+
+                    }else{
+
+                        agregarservicio(nombreServicio,descripcionServicio);
+
+
+                    }
 
 
                 }
+            });
+
+
+
+
+        }else{
+
+            CrearServicio.setText("Actualizar Servicio");
+            getservvicio(id);
+
+
+            CrearServicio.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String nombreServicio = nombre.getText().toString().trim();
+                    String descripcionServicio = descripcion.getText().toString().trim();
+
+                    if(nombreServicio.isEmpty() && descripcionServicio.isEmpty()){
+
+                        Toast.makeText(AgregarServicio.this, "Ingresa los Datos", Toast.LENGTH_SHORT).show();
+
+                    }else{
+
+                        Actualizarservicio(nombreServicio,descripcionServicio, id);
+
+
+                    }
+
+
+
+                }
+            });
+
+
+        }
+
+
+
+
+
+
+
+
+
+    }
+
+    private void Actualizarservicio(String nombreServicio, String descripcionServicio, String id) {
+        Map<String,Object> map = new HashMap<>();
+
+        map.put("nombre", nombreServicio);
+        map.put("descripcion",descripcionServicio);
+
+        mFirestore.collection("servicio").document(id).update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                Toast.makeText(AgregarServicio.this, "Actualizado Exitosamente", Toast.LENGTH_SHORT).show();
+                finish();
+
 
 
             }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(AgregarServicio.this, "Error al Actualizar", Toast.LENGTH_SHORT).show();
+            }
         });
+
 
 
     }
@@ -109,6 +183,26 @@ public class AgregarServicio extends AppCompatActivity {
 
     }
 
+    private void  getservvicio(String id){
+        mFirestore.collection("servicio").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                String nombreServicio = documentSnapshot.getString("nombre");
+                String descripcionServicio = documentSnapshot.getString("descripcion");
+
+                nombre.setText(nombreServicio);
+                descripcion.setText(descripcionServicio);
+
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(AgregarServicio.this, "Error al Obtener los Datos", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
 
     @Override
     public boolean onSupportNavigateUp() {

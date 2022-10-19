@@ -1,11 +1,13 @@
 package com.example.tesis.ui.dashboard;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListAdapter;
+import android.widget.SearchView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +33,7 @@ public class DashboardFragment extends Fragment {
     private FragmentDashboardBinding binding;
 
 
+    SearchView searchView;
 
     RecyclerView mRecycler;
     ServicioAdapterdasboard mAdapter;
@@ -57,32 +60,71 @@ public class DashboardFragment extends Fragment {
 
 
 
+        searchView = root.findViewById(R.id.Search);
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
+
+
+
+
+
+        setUApRecyclerView(root);
+        search_View();
+
+
+
+        return root;
+
+    }
+    @SuppressLint("NotifyDataSetChanged")
+    private void setUApRecyclerView(View root) {
         mRecycler = root.findViewById(R.id.RecyclerViewServiciosdasboard);
         mRecycler.setLayoutManager(new LinearLayoutManager(root.getContext()));
+
         Query query = mFirestore.collection("servicio");
 
         FirestoreRecyclerOptions<Servicio> firestoreRecyclerOptions =
-                new FirestoreRecyclerOptions.Builder<Servicio>().setQuery(query.orderBy("iddelcreador"), Servicio.class).build();
+                new FirestoreRecyclerOptions.Builder<Servicio>()
+                        .setQuery(query.orderBy("iddelcreador"), Servicio.class).build();
 
         mAdapter = new ServicioAdapterdasboard(firestoreRecyclerOptions,getActivity());
         mAdapter.notifyDataSetChanged();
         mRecycler.setAdapter(mAdapter);
 
+    }
+
+    private void search_View() {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                textSearch(s);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                textSearch(s);
+                return false;
+            }
+        });
+
+}
 
 
+    private void textSearch(String s) {
+
+        Query query = mFirestore.collection("servicio");
+
+        FirestoreRecyclerOptions<Servicio> firestoreRecyclerOptions =
+                new FirestoreRecyclerOptions.Builder<Servicio>()
+                        .setQuery(query.orderBy("nombre").startAt(s).endAt(s+"~")
+                                , Servicio.class).build();
+
+        mAdapter = new ServicioAdapterdasboard(firestoreRecyclerOptions,getActivity());
+        mAdapter.startListening();
+        mRecycler.setAdapter(mAdapter);
 
 
-
-
-
-
-
-
-
-
-        return root;
 
     }
 

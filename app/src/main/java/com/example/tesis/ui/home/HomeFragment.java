@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tesis.ActualizarUsuario;
 import com.example.tesis.First_layout;
 import com.example.tesis.R;
 import com.example.tesis.databinding.FragmentHomeBinding;
@@ -28,7 +29,7 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
     private FragmentHomeBinding binding;
 
-    Button cerrarsesion;
+    Button cerrarsesion, perfil;
 
     TextView nombre;
 
@@ -58,9 +59,18 @@ public class HomeFragment extends Fragment {
 
         cerrarsesion = root.findViewById(R.id.btncerrarsesion);
         nombre = root.findViewById(R.id.nombredeusuario);
+        perfil = root.findViewById(R.id.datosdeusuatio);
 
         obtenerdatos();
 
+
+        perfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getActivity(), ActualizarUsuario.class));
+
+            }
+        });
 
         cerrarsesion.setOnClickListener(new View.OnClickListener() {
             @Override
