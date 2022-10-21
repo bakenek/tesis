@@ -141,8 +141,8 @@ public class ActualizarUsuario extends AppCompatActivity {
                 String contacto = documentSnapshot.getString("contacto");
 
                 cajauser.setText(nombreServicio);
-                cajapwd.setText(email);
-                cajaemail.setText(clave);
+                cajapwd.setText(clave);
+                cajaemail.setText(email);
                 cajacontacto.setText(contacto);
 
 

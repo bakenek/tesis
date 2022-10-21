@@ -59,6 +59,7 @@ public class ServicioAdapter extends FirestoreRecyclerAdapter<Servicio,ServicioA
 
 
 
+
         holder.g.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

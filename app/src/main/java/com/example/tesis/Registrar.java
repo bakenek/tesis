@@ -18,6 +18,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -106,10 +107,27 @@ public class Registrar extends AppCompatActivity {
                 map.put("clave", pasword);
                 map.put("contacto", contacto);
 
+
+                Map<String,Object> notis = new HashMap<>();
+
+                notis.put("idnotificado", id);
+                notis.put("titulo", "Bienvenido " + nameuser);
+                notis.put("cuerpo","Te damos la bienvenida " + nameuser +", gracias por unirte a Clicking" );
+
                 mFirestore.collection("user").document(id).set(map)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
+
+
+                        mFirestore.collection("notificaciones").add(notis).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                            @Override
+                            public void onSuccess(DocumentReference documentReference) {
+
+
+                            }
+                        });
+
 
                         Toast.makeText(Registrar.this,"Usuario registrado " +
                                 cajauser.getText().toString(),Toast.LENGTH_SHORT).show();

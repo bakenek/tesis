@@ -122,10 +122,14 @@ public class AgregarServicio extends AppCompatActivity {
     }
 
     private void Actualizarservicio(String nombreServicio, String descripcionServicio, String id) {
+
         Map<String,Object> map = new HashMap<>();
 
         map.put("nombre", nombreServicio);
         map.put("descripcion",descripcionServicio);
+
+
+
 
         mFirestore.collection("servicio").document(id).update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
@@ -159,6 +163,15 @@ public class AgregarServicio extends AppCompatActivity {
         map.put("descripcion",descripcionServicio);
         map.put("FechaDeCreacion",date);
 
+        Map<String,Object> notis = new HashMap<>();
+
+        notis.put("idnotificado", id);
+        notis.put("titulo", "Creaste un servicio");
+        notis.put("cuerpo","El Servicio: " + nombreServicio + ", fue creado con exito." );
+
+
+
+
 
 
 
@@ -167,6 +180,14 @@ public class AgregarServicio extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentReference documentReference) {
 
+
+                mFirestore.collection("notificaciones").add(notis).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+
+
+                    }
+                });
 
                 Toast.makeText(AgregarServicio.this, "Creado exitosamente", Toast.LENGTH_SHORT).show();
                 finish();
