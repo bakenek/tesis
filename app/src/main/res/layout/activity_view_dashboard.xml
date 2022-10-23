@@ -4,11 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C1BCBC"
+    android:background="#59817676"
     tools:context=".ui.dashboard.ViewActivityDashboard">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="373dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:layout_marginBottom="10dp"
@@ -24,24 +24,27 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:gravity="center"
                 android:orientation="vertical">
 
-                <androidx.cardview.widget.CardView
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:cardCornerRadius="360dp">
+                    android:layout_height="150dp"
+                    android:layout_gravity="center"
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/imageViewserviciovista"
-                        android:layout_width="150dp"
-                        android:layout_height="150dp"
-                        android:layout_gravity="center"
-                        android:adjustViewBounds="false"
-                        android:background="@mipmap/servi"
-                        android:scaleType="centerInside"
-                        android:visibility="visible" />
-                </androidx.cardview.widget.CardView>
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="360dp">
+
+                        <ImageView
+                            android:id="@+id/imageViewserviciovista"
+                            android:layout_width="150dp"
+                            android:layout_height="150dp"
+                            android:layout_gravity="center"
+                            android:background="@mipmap/servi" />
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
 
                 <Space
                     android:layout_width="match_parent"

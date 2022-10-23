@@ -1,15 +1,20 @@
 package com.example.tesis.model;
 
 public class Servicio {
-    String nombre,descripcion,iddelcreador,  FechaDeCreacion;
+    String nombre;
+    String descripcion;
+    String iddelcreador;
+    String FechaDeCreacion;
+    String Photo;
+
     public Servicio(){}
 
-
-    public Servicio(String nombre, String descripcion, String iddelcreador, String fechaDeCreacion) {
+    public Servicio(String nombre, String descripcion, String iddelcreador, String fechaDeCreacion , String photo) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.iddelcreador = iddelcreador;
         this.FechaDeCreacion = fechaDeCreacion;
+        this.Photo = photo;
     }
 
     public String getNombre() {
@@ -43,4 +48,9 @@ public class Servicio {
     public void setFechaDeCreacion(String fechaDeCreacion) {
         FechaDeCreacion = fechaDeCreacion;
     }
+
+    public String getPhoto() {return Photo;}
+
+    public void setPhoto(String photo) {Photo = photo;}
+
 }

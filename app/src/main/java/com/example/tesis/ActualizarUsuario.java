@@ -1,21 +1,31 @@
 package com.example.tesis;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -25,14 +35,26 @@ import java.util.Map;
 
 public class ActualizarUsuario extends AppCompatActivity {
 
+
+    ImageView usuariofoto;
+
     EditText cajauser, cajapwd , cajaemail,cajacontacto;
 
-    Button CrearServicio , regresar;
+    Button CrearServicio , regresar , eliminarfoto;
 
     FirebaseAuth mAuth;
     FirebaseFirestore mFirestore;
 
+    StorageReference storageReference;
+    String storage_path = "tesis/*";
 
+
+    private static final int COD_SEL_STORAGE =200;
+    private  static final  int COD_SEL_IMAGE = 300;
+
+    private Uri image_url;
+    String photo = "photo";
+    String idd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +68,14 @@ public class ActualizarUsuario extends AppCompatActivity {
         mFirestore = FirebaseFirestore.getInstance();
         String id = mAuth.getCurrentUser().getUid();
 
+        storageReference = FirebaseStorage.getInstance().getReference();
+
+        //agregarfoto = (Button) findViewById(R.id.btnEditarUsuario);
+        eliminarfoto = (Button) findViewById(R.id.btneliminar);
+
+        usuariofoto = findViewById(R.id.fotoActualizaciondeUsuario);
+
+
         cajauser = (EditText) findViewById(R.id.edittextusuarioActualizar);
         cajapwd = (EditText) findViewById(R.id.edittextclaveActualizar);
         cajaemail = (EditText) findViewById(R.id.edittexEmailActualizar);
@@ -54,11 +84,34 @@ public class ActualizarUsuario extends AppCompatActivity {
         CrearServicio = (Button) findViewById(R.id.btnActualizarusuario);
         regresar= (Button) findViewById(R.id.btnActualizarregresar);
 
-
-
-
             CrearServicio.setText("Actualizar");
             getservvicio(id);
+
+          //  agregarfoto.setOnClickListener(new View.OnClickListener() {
+              //  @Override
+               // public void onClick(View v) {
+                  //  uploadPhoto();
+              //  }
+          //  });
+
+       usuariofoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              uploadPhoto();
+          }
+        });
+
+
+        eliminarfoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                HashMap<String, Object>map = new HashMap<>();
+                map.put("Photo","");
+                mFirestore.collection("user").document(id).update(map);
+                Toast.makeText(ActualizarUsuario.this,"Foto eliminada", Toast.LENGTH_SHORT).show();
+
+            }
+        });
 
 
             CrearServicio.setOnClickListener(new View.OnClickListener() {
@@ -101,6 +154,82 @@ public class ActualizarUsuario extends AppCompatActivity {
 
     }
 
+
+
+    private void uploadPhoto() {
+        Intent i = new Intent(Intent.ACTION_PICK);
+        i.setType("image/*");
+
+        startActivityForResult(i, COD_SEL_IMAGE);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if(resultCode == RESULT_OK){
+            if(requestCode == COD_SEL_IMAGE){
+                image_url = data.getData();
+                subirPhoto(image_url);
+
+
+            }
+
+
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void subirPhoto(Uri image_url) {
+
+        idd= mAuth.getCurrentUser().getUid();
+
+        String rute_storage_photo = storage_path + "" + photo + "" + idd;
+        StorageReference reference = storageReference.child(rute_storage_photo);
+        reference.putFile(image_url).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+            @Override
+            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                while (!uriTask.isSuccessful()){
+
+                    if(uriTask.isSuccessful()){
+
+                        uriTask.addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+
+                                String dowload_uri = uri.toString();
+                                HashMap<String, Object> map = new HashMap<>();
+                                map.put("Photo", dowload_uri );
+                                mFirestore.collection("user").document(idd).update(map);
+                                Toast.makeText(ActualizarUsuario.this, "Foto Actualizada", Toast.LENGTH_SHORT).show();
+
+                            }
+                        });
+
+
+                    }
+
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(ActualizarUsuario.this, "Error al cargar foto", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+
+    }
+
+
+
+
+
+
+
+
+
     private void Actualizarservicio(String nombreServicio, String email,String clave, String contacto, String id) {
         Map<String,Object> map = new HashMap<>();
 
@@ -139,11 +268,31 @@ public class ActualizarUsuario extends AppCompatActivity {
                 String email = documentSnapshot.getString("correo");
                 String clave = documentSnapshot.getString("clave");
                 String contacto = documentSnapshot.getString("contacto");
+                String fotouser = documentSnapshot.getString("Photo");
 
                 cajauser.setText(nombreServicio);
                 cajapwd.setText(clave);
                 cajaemail.setText(email);
                 cajacontacto.setText(contacto);
+
+                try {
+                    if(!fotouser.equals("")){
+
+                        Picasso.with(ActualizarUsuario.this)
+                                .load(fotouser)
+                                .resize(150,150)
+                                .into(usuariofoto);
+
+                    }
+
+                }catch (Exception e){
+                    Log.v("Error", "e: "+ e);
+                    Toast.makeText(ActualizarUsuario.this,"Error", Toast.LENGTH_SHORT).show();
+
+
+
+                }
+
 
 
 

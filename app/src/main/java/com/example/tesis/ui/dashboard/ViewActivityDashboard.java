@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 public class ViewActivityDashboard extends AppCompatActivity {
 
@@ -74,6 +76,35 @@ public class ViewActivityDashboard extends AppCompatActivity {
                 String descripcionServicio = documentSnapshot.getString("descripcion");
                 String FechaDeCreacionServicio = documentSnapshot.getString("FechaDeCreacion");
                 String idcreador = documentSnapshot.getString("iddelcreador");
+                String fotoservicio = documentSnapshot.getString("Photo");
+
+
+                try {
+                    if(!fotoservicio.equals("")){
+
+                        Picasso.with(ViewActivityDashboard.this)
+                                .load(fotoservicio)
+                                .resize(150,150)
+                                .into(imageView);
+
+                    }
+
+                }catch (Exception e){
+                    Log.v("Error", "e: "+ e);
+
+                }
+
+
+
+
+
+
+
+
+
+
+
+
 
                 titulo.setText(nombreServicio);
                 descripcion.setText(descripcionServicio);
@@ -86,6 +117,11 @@ public class ViewActivityDashboard extends AppCompatActivity {
                         String nombreCreador = documentSnapshot.getString("nombre");
                         String contactoCreador = documentSnapshot.getString("contacto");
                         String correoCreador = documentSnapshot.getString("correo");
+
+
+
+
+
 
 
                         textviewgeneral.setText("Creado por: "+ nombreCreador + "\n"

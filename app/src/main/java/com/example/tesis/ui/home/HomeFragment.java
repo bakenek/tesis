@@ -8,10 +8,13 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +26,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.squareup.picasso.Picasso;
 
 public class HomeFragment extends Fragment {
 
@@ -30,6 +34,7 @@ public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
 
     Button cerrarsesion, perfil;
+    ImageView fotoudesuario;
 
     TextView nombre;
 
@@ -60,6 +65,7 @@ public class HomeFragment extends Fragment {
         cerrarsesion = root.findViewById(R.id.btncerrarsesion);
         nombre = root.findViewById(R.id.nombredeusuario);
         perfil = root.findViewById(R.id.datosdeusuatio);
+        fotoudesuario = root.findViewById(R.id.fotoUsuario);
 
         obtenerdatos();
 
@@ -96,7 +102,25 @@ public class HomeFragment extends Fragment {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if(documentSnapshot.exists()){
                     String usuario = documentSnapshot.getString("nombre");
+                    String fotouser = documentSnapshot.getString("Photo");
                     nombre.setText(usuario);
+                    try {
+                        if(!fotouser.equals("")){
+
+                            Picasso.with(getContext())
+                                    .load(fotouser)
+                                    .resize(150,150)
+                                    .into(fotoudesuario);
+
+                        }
+
+                    }catch (Exception e){
+                        Log.v("Error", "e: "+ e);
+                        Toast.makeText(getContext(),"Error", Toast.LENGTH_SHORT).show();
+
+
+
+                    }
 
 
 

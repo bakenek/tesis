@@ -1,15 +1,19 @@
 package com.example.tesis;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -20,11 +24,18 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Registrar extends AppCompatActivity {
+
+
+
 
     EditText cajauser, cajapwd , cajaemail,cajacontacto;
 
@@ -35,12 +46,16 @@ public class Registrar extends AppCompatActivity {
 
 
 
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.registro_perfil);
 
         getSupportActionBar().setTitle("Registro");
+
 
         cajauser = (EditText) findViewById(R.id.edittextusuario);
         cajapwd = (EditText) findViewById(R.id.edittextclave);
@@ -50,8 +65,15 @@ public class Registrar extends AppCompatActivity {
         btnregistrar = (Button) findViewById(R.id.btnregistrarusuario);
         btnregresar = (Button) findViewById(R.id.btnregresar);
 
+
+
+
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
+
+
+
+
 
 
 
@@ -66,6 +88,12 @@ public class Registrar extends AppCompatActivity {
 
                 }
             });
+
+
+
+
+
+
 
             btnregistrar.setOnClickListener(new View.OnClickListener() {
 
@@ -94,7 +122,8 @@ public class Registrar extends AppCompatActivity {
         }
 
 
-    public void registerUser(String nameuser, String emailuser, String pasword,String contacto) {
+
+    public void registerUser(String nameuser, String emailuser, String pasword, String contacto) {
         mAuth.createUserWithEmailAndPassword(emailuser,pasword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {

@@ -37,35 +37,35 @@
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="145dp"
             android:background="#FFFFFF"
             android:orientation="vertical">
 
 
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="23dp" />
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="81dp"
+                android:layout_height="match_parent"
                 android:orientation="horizontal">
 
                 <Space
                     android:layout_width="25dp"
                     android:layout_height="match_parent" />
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="66dp"
-                    android:layout_height="match_parent"
-                    android:scaleType="centerInside"
-                    android:visibility="visible"
-                    app:srcCompat="@mipmap/perfil"
-                    tools:src="@mipmap/perfil" />
+                <androidx.cardview.widget.CardView
+                    android:layout_width="110dp"
+                    android:layout_height="110dp"
+                    android:layout_gravity="center"
+                    app:cardCornerRadius="360dp">
+
+                    <ImageView
+                        android:id="@+id/fotoUsuario"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center" />
+                </androidx.cardview.widget.CardView>
 
                 <Space
-                    android:layout_width="11dp"
+                    android:layout_width="20dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0" />
 
@@ -74,26 +74,19 @@
                     android:layout_height="match_parent"
                     android:orientation="vertical">
 
-                    <Space
-                        android:layout_width="match_parent"
-                        android:layout_height="5dp"
-                        android:layout_weight="1" />
-
                     <TextView
                         android:id="@+id/nombredeusuario"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:textSize="20dp" />
+                        android:gravity="center_vertical"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                        android:textColor="@color/purple_500"
+                        android:textSize="24sp"
+                        tools:text="a" />
                 </LinearLayout>
 
             </LinearLayout>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="19dp"
-                android:backgroundTint="@android:color/darker_gray"
-                android:visibility="visible" />
 
         </LinearLayout>
 
@@ -120,27 +113,14 @@
                     android:text="Perfil"
                     android:textSize="16sp" />
 
-                <TextView
-                    android:id="@+id/textView4"
+                <Button
+                    android:id="@+id/btnhomefavoritos"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TextView"
-                    android:textSize="80sp"
-                    tools:text="servicios inf" />
-
-                <TextView
-                    android:id="@+id/textView11"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="favoritos"
-                    android:textSize="80sp" />
-
-                <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="opciones"
-                    android:textSize="80sp" />
+                    android:layout_gravity="center"
+                    android:backgroundTint="@color/white"
+                    android:text="Favoritos"
+                    android:textSize="16sp" />
 
                 <Button
                     android:id="@+id/btncerrarsesion"
