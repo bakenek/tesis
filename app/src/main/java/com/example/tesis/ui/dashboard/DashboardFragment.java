@@ -85,7 +85,7 @@ public class DashboardFragment extends Fragment {
 
         FirestoreRecyclerOptions<Servicio> firestoreRecyclerOptions =
                 new FirestoreRecyclerOptions.Builder<Servicio>()
-                        .setQuery(query.orderBy("iddelcreador"), Servicio.class).build();
+                        .setQuery(query.orderBy("FechaDeCreacion", Query.Direction.DESCENDING), Servicio.class).build();
 
         mAdapter = new ServicioAdapterdasboard(firestoreRecyclerOptions,getActivity());
         mAdapter.notifyDataSetChanged();

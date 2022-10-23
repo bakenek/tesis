@@ -5,6 +5,7 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/navigation_home">
 
+
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.tesis.ui.home.HomeFragment"
@@ -29,5 +30,6 @@
         android:name="com.example.tesis.ui.actividad.actividadFragment"
         android:label="@string/title_actividad"
         tools:layout="@layout/fragment_actividad" />
+
 
 </navigation>

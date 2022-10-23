@@ -7,6 +7,7 @@
     android:background="#54604E4E"
     android:backgroundTintMode="add">
 
+
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
@@ -17,6 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
 
         <ScrollView
             android:layout_width="match_parent"

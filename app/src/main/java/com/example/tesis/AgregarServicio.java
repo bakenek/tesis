@@ -14,6 +14,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -135,6 +138,7 @@ public class AgregarServicio extends AppCompatActivity {
             eliminarservicio.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    deleteServicio(id);
 
                 }
             });
@@ -178,12 +182,31 @@ public class AgregarServicio extends AppCompatActivity {
 
 
 
+    }
+
+    private void deleteServicio(String id) {
+
+        mFirestore.collection("servicio").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void unused) {
+                FragmentManager manager = getSupportFragmentManager();
+                Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.navigation_actividad);
+                FragmentTransaction transaction = manager.beginTransaction();
+
+                transaction.replace(R.id.navigation_actividad,fragment );
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+                Toast.makeText(AgregarServicio.this, "Servicio eliminado exitosamente", Toast.LENGTH_SHORT).show();
 
 
-
-
-
-
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(AgregarServicio.this, "Error al eliminar Servicio", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void uploadPhoto() {
@@ -270,8 +293,18 @@ public class AgregarServicio extends AppCompatActivity {
             @Override
             public void onSuccess(Void unused) {
                 Toast.makeText(AgregarServicio.this, "Actualizado Exitosamente", Toast.LENGTH_SHORT).show();
-                finish();
-                startActivity(new Intent(AgregarServicio.this,MainActivity.class));
+               // finish();
+
+                FragmentManager manager = getSupportFragmentManager();
+                Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.navigation_actividad);
+                FragmentTransaction transaction = manager.beginTransaction();
+
+                transaction.replace(R.id.navigation_actividad,fragment );
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+
+                //startActivity(new Intent(AgregarServicio.this,MainActivity.class));
 
 
 
@@ -326,8 +359,17 @@ public class AgregarServicio extends AppCompatActivity {
                 });
 
                 Toast.makeText(AgregarServicio.this, "Creado exitosamente", Toast.LENGTH_SHORT).show();
-                finish();
-                startActivity(new Intent(AgregarServicio.this,MainActivity.class));
+                //finish();
+                FragmentManager manager = getSupportFragmentManager();
+                Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.navigation_actividad);
+                FragmentTransaction transaction = manager.beginTransaction();
+
+                transaction.replace(R.id.navigation_actividad,fragment );
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+
+                //startActivity(new Intent(AgregarServicio.this,MainActivity.class));
 
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -363,8 +405,6 @@ public class AgregarServicio extends AppCompatActivity {
 
                 }catch (Exception e){
                     Log.v("Error", "e: "+ e);
-                    Toast.makeText(AgregarServicio.this,"Error", Toast.LENGTH_SHORT).show();
-
 
 
                 }
@@ -386,9 +426,18 @@ public class AgregarServicio extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        finish();
-        startActivity(new Intent(AgregarServicio.this,MainActivity.class));
-        //onBackPressed();
+       //finish();
+        FragmentManager manager = getSupportFragmentManager();
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.navigation_actividad);
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        transaction.replace(R.id.navigation_actividad,fragment );
+        transaction.addToBackStack(null);
+        transaction.commitNow();
+
+       // startActivity(new Intent(AgregarServicio.this,fragment.getClass()));
+
+       // super.onBackPressed();
         return false;
     }
 }

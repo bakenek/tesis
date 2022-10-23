@@ -35,19 +35,12 @@ import java.util.Map;
 public class Registrar extends AppCompatActivity {
 
 
-
-
     EditText cajauser, cajapwd , cajaemail,cajacontacto;
 
     Button btnregistrar ,btnregresar;
 
     FirebaseAuth mAuth;
     FirebaseFirestore mFirestore;
-
-
-
-
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

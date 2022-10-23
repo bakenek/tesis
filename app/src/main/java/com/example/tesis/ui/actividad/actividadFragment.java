@@ -1,5 +1,7 @@
 package com.example.tesis.ui.actividad;
 
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -24,6 +26,7 @@ import com.example.tesis.R;
 import com.example.tesis.adapter.ServicioAdapter;
 import com.example.tesis.databinding.FragmentActividadBinding;
 import com.example.tesis.model.Servicio;
+import com.example.tesis.ui.home.HomeFragment;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -41,6 +44,7 @@ public class actividadFragment extends Fragment {
 
     FirebaseAuth mAuth;
     FirebaseFirestore mFirestore;
+
 
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -83,11 +87,16 @@ public class actividadFragment extends Fragment {
 
 
 
+
+
         IragregarServicio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+
+
                 startActivity(new Intent(getContext(), AgregarServicio.class));
+
             }
         });
 
@@ -96,6 +105,8 @@ public class actividadFragment extends Fragment {
 
         return root;
     }
+
+
 
     @Override
     public void onStart() {

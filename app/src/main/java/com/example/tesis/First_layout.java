@@ -79,7 +79,7 @@ public class First_layout extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                finish();
+                //finish();
                 startActivity(new Intent(First_layout.this,Registrar.class));
             }
         });
