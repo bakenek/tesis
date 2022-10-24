@@ -11,14 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:layout_marginBottom="10dp"
         android:background="@color/white"
-        android:backgroundTint="@color/white"
-        app:cardCornerRadius="20dp">
+        android:backgroundTint="@color/white">
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingTop="15dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -53,11 +52,13 @@
 
                 <RatingBar
                     android:id="@+id/ratingBarServicio"
+                    style="@android:style/Widget.DeviceDefault.Light.RatingBar.Indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:contentDescription="Califica el servicio"
                     android:numStars="5"
+                    android:progressTint="@color/purple_500"
                     android:rating="0" />
 
                 <Space
@@ -71,8 +72,9 @@
                     android:layout_weight="0.25"
                     android:gravity="center"
                     android:text="titulo del servicio"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                    android:textColor="@color/purple_500" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textColor="@color/purple_500"
+                    android:textSize="20dp" />
 
                 <TextView
                     android:id="@+id/TextViewcreadoFechaContacto"
@@ -93,7 +95,8 @@
                     android:paddingRight="10dp"
                     android:paddingBottom="40dp"
                     android:text="descripcion"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textSize="20dp" />
 
             </LinearLayout>
         </ScrollView>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#54D1D1D1"
-    android:backgroundTint="#54604E4E"
+    android:backgroundTint="@color/fondo"
     android:backgroundTintMode="add"
     tools:context=".ui.home.HomeFragment">
 
@@ -52,8 +52,8 @@
                     android:layout_height="match_parent" />
 
                 <androidx.cardview.widget.CardView
-                    android:layout_width="110dp"
-                    android:layout_height="110dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:layout_gravity="center"
                     app:cardCornerRadius="360dp">
 
@@ -61,7 +61,8 @@
                         android:id="@+id/fotoUsuario"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center" />
+                        android:layout_gravity="center"
+                        android:background="@color/colorsecundario" />
                 </androidx.cardview.widget.CardView>
 
                 <Space
@@ -110,7 +111,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:backgroundTint="@color/white"
-                    android:text="Perfil"
+                    android:text="Editar Perfil"
                     android:textSize="16sp" />
 
                 <Button

@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">tesis</string>
+    <string name="app_name">ClickIng</string>
     <string name="title_home">Perfil</string>
     <string name="title_dashboard">Principal</string>
     <string name="title_notifications">Notificationes</string>
-    <string name="title_actividad">Actividad</string>
+    <string name="title_actividad">Mis Servicios</string>
     <string name="Nombre_Usuario">Usuario</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

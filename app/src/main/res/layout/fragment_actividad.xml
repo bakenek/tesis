@@ -4,15 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#54604E4E"
+    android:background="@color/fondo"
     android:backgroundTintMode="add">
 
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="35dp"
+        android:layout_marginBottom="35dp"
+        android:clickable="true"
+        android:contentDescription="Agregar Servicio"
+        app:backgroundTint="@color/purple_500"
+        app:fabSize="normal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:maxImageSize="30dp"
+        app:srcCompat="@drawable/ic_baseline_add_24" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="80dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -29,21 +43,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView5"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="5dp"
-                    android:text="Mis Servicios"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                    android:textColor="@color/purple_500" />
-
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="10dp" />
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/RecyclerViewMisServicios"
                     android:layout_width="match_parent"
@@ -52,20 +51,8 @@
                     android:paddingRight="12dp" />
             </LinearLayout>
         </ScrollView>
-    </LinearLayout>
 
-    <Button
-        android:id="@+id/btnIrAAgregarServicio"
-        android:layout_width="200dp"
-        android:layout_height="48dp"
-        android:layout_marginBottom="15dp"
-        android:background="@color/purple_500"
-        android:text="Agregar Servicio"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/textactividad"

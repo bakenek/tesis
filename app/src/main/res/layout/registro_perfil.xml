@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:backgroundTint="@color/white"
     app:title="Registro de Perfil">
 
 
@@ -31,7 +33,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="25dp" />
+            android:layout_height="40dp" />
 
         <EditText
             android:id="@+id/edittextusuario"
@@ -39,7 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:ems="10"
-            android:hint=" Ingresa el usuario"
+            android:hint="Nombre de usuario"
             android:inputType="textPersonName"
             android:minHeight="48dp" />
 
@@ -53,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:ems="10"
-            android:hint=" Ingresa el Email"
+            android:hint="Email: (Ejemplo: clicking@gmail.com)"
             android:inputType="textEmailAddress"
             android:minHeight="48dp" />
 
@@ -67,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:ems="10"
-            android:hint=" Ingresa la clave"
+            android:hint="Clave"
             android:inputType="textPassword"
             android:minHeight="48dp" />
 
@@ -81,7 +83,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:ems="10"
-            android:hint="Contacto"
+            android:hint="Contacto: (Ejemplo: 04147575155)"
             android:inputType="phone"
             android:minHeight="48dp" />
 

@@ -61,7 +61,7 @@ public class ActualizarUsuario extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.actualizar_usuario);
 
-        getSupportActionBar().setTitle("Actualizar datos");
+        getSupportActionBar().setTitle("Editar perfil");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mAuth = FirebaseAuth.getInstance();

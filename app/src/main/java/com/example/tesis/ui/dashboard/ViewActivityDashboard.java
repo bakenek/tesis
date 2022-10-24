@@ -35,7 +35,8 @@ public class ViewActivityDashboard extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseFirestore mFirestore;
 
-    double ratingg , promedio;
+    double ratingg , promedio, usuariosquevotaron;
+
 
    private RatingBar ratingBar;
 
@@ -97,21 +98,23 @@ public class ViewActivityDashboard extends AppCompatActivity {
                     }
                 });
 
-/*
+
 
                 if(ratingg != rati){
 
                     Map<String,Object> promediorating = new HashMap<>();
 
+                    usuariosquevotaron +=  1;
+                    Double promedionuevo = promedio + rati -ratingg ;
+                    promediorating.put("promedio", promedionuevo);
+                    promediorating.put("numeroVotantes", usuariosquevotaron);
 
-                    Double promedionuevo = promedio - ratingg +rati;
-                    map.put("promedio", promedionuevo);
 
 
-                    if(promedionuevo != promedio){
+
 
                         mFirestore.collection("promedioestrellas")
-                                .document("promediorating")
+                                .document(id)
                                 .set(promediorating).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
                                     public void onSuccess(Void unused) {
@@ -119,13 +122,8 @@ public class ViewActivityDashboard extends AppCompatActivity {
                                     }
                                 });
 
-
-                    }
-
-
-
                 }
-                */
+
 
             }
    });
@@ -166,12 +164,14 @@ public class ViewActivityDashboard extends AppCompatActivity {
 
                       if(estrellas == null){
                           setratin = 0;
+                          ratingBar.setRating(setratin);
+                          ratingg = setratin;
                       }else{
                           setratin = estrellas.floatValue();
+                          ratingBar.setRating(setratin);
+                          ratingg = setratin;
                       }
 
-                        ratingBar.setRating(setratin);
-                      ratingg = setratin;
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -181,11 +181,12 @@ public class ViewActivityDashboard extends AppCompatActivity {
                 });
 
 
-                mFirestore.collection("promedioestrellas").document("promediorating").get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                mFirestore.collection("promedioestrellas").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot3) {
-                     //Double promedios = documentSnapshot3.getDouble("promedio");
-                    // promedio = promedios;
+                     Double promedios = documentSnapshot3.getDouble("promedio");
+                    // usuariosquevotaron = documentSnapshot3.getDouble("numeroVotantes");
+                     promedio = promedios;
                     }
                 });
 

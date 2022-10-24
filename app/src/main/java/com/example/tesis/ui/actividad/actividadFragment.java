@@ -28,6 +28,7 @@ import com.example.tesis.databinding.FragmentActividadBinding;
 import com.example.tesis.model.Servicio;
 import com.example.tesis.ui.home.HomeFragment;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -44,6 +45,7 @@ public class actividadFragment extends Fragment {
 
     FirebaseAuth mAuth;
     FirebaseFirestore mFirestore;
+    FloatingActionButton floatingActionButton;
 
 
 
@@ -66,7 +68,6 @@ public class actividadFragment extends Fragment {
         });
 
 
-        IragregarServicio = root.findViewById(R.id.btnIrAAgregarServicio);
 
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
@@ -74,6 +75,7 @@ public class actividadFragment extends Fragment {
         mRecycler.setLayoutManager(new LinearLayoutManager(root.getContext()));
         Query query = mFirestore.collection("servicio");
         String b = mAuth.getCurrentUser().getUid();
+        floatingActionButton = root.findViewById(R.id.floatingActionButton);
 
         FirestoreRecyclerOptions<Servicio> firestoreRecyclerOptions =
                 new FirestoreRecyclerOptions.Builder<Servicio>().setQuery(query.orderBy("iddelcreador").startAt(b).endAt(b)
@@ -89,7 +91,9 @@ public class actividadFragment extends Fragment {
 
 
 
-        IragregarServicio.setOnClickListener(new View.OnClickListener() {
+
+        //IragregarServicio
+          floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

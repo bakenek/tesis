@@ -21,6 +21,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -46,6 +47,7 @@ public class AgregarServicio extends AppCompatActivity {
 
     FirebaseAuth mAuth;
     FirebaseFirestore mFirestore;
+
 
 
     StorageReference storageReference;
@@ -85,6 +87,7 @@ public class AgregarServicio extends AppCompatActivity {
 
         eliminarfoto =(Button) findViewById(R.id.btneliminarfotoseervi);
         eliminarservicio =(Button) findViewById(R.id.btnborrarservicio);
+
 
         if(id == null || id == ""){
 

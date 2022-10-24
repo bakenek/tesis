@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     app:title="Registro de Perfil">
 
 
@@ -18,7 +19,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="15dp" />
+            android:layout_height="20dp" />
 
         <TextView
             android:id="@+id/titulo_registroPerfil"
@@ -27,11 +28,11 @@
             android:gravity="center"
             android:text="Registro de Usuario"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/purple_500" />
+            android:textColor="@color/colorsecundario" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="15dp" />
+            android:layout_height="20dp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -65,8 +66,8 @@
                     android:layout_height="40dp"
                     android:layout_weight="1"
                     android:background="@android:drawable/ic_menu_delete"
-                    android:backgroundTint="#FF0000"
-                    android:backgroundTintMode="screen"
+                    android:backgroundTint="#938E8E"
+                    android:backgroundTintMode="src_in"
                     tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             </LinearLayout>
@@ -77,68 +78,129 @@
             android:layout_width="match_parent"
             android:layout_height="15dp" />
 
-        <EditText
-            android:id="@+id/edittextusuarioActualizar"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ems="10"
-            android:hint=" Ingresa el usuario"
-            android:inputType="textPersonName"
-            android:minHeight="48dp" />
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="288dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/edittextusuarioActualizar"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:ems="10"
+                    android:hint=" Ingresa el usuario"
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp" />
+
+                <EditText
+                    android:id="@+id/edittexEmailActualizar"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:ems="10"
+                    android:hint=" Ingresa el Email"
+                    android:inputType="textEmailAddress"
+                    android:minHeight="48dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp" />
+
+                <EditText
+                    android:id="@+id/edittextclaveActualizar"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:ems="10"
+                    android:hint=" Ingresa la clave"
+                    android:inputType="textPassword"
+                    android:minHeight="48dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp" />
+
+                <EditText
+                    android:id="@+id/edittextcontactoActualizar"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:ems="10"
+                    android:hint="Contacto"
+                    android:inputType="phone"
+                    android:minHeight="48dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp" />
+
+                <EditText
+                    android:id="@+id/editTextTextMultiLine"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:hint="Estudios"
+                    android:inputType="textMultiLine"
+                    android:minHeight="70dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp" />
+
+                <EditText
+                    android:id="@+id/editTextTextMultiLine2"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:hint="Habilidades"
+                    android:inputType="textMultiLine"
+                    android:minHeight="70dp" />
+
+                <Space
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp" />
+
+                <EditText
+                    android:id="@+id/editTextTextMultiLine3"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:ems="10"
+                    android:gravity="start|top"
+                    android:hint="Intereses"
+                    android:inputType="textMultiLine"
+                    android:minHeight="70dp" />
+
+                <Space
+                    android:layout_width="15dp"
+                    android:layout_height="15dp" />
+
+            </LinearLayout>
+        </ScrollView>
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="25dp" />
-
-        <EditText
-            android:id="@+id/edittexEmailActualizar"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ems="10"
-            android:hint=" Ingresa el Email"
-            android:inputType="textEmailAddress"
-            android:minHeight="48dp" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="25dp" />
-
-        <EditText
-            android:id="@+id/edittextclaveActualizar"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ems="10"
-            android:hint=" Ingresa la clave"
-            android:inputType="textPassword"
-            android:minHeight="48dp" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="25dp" />
-
-        <EditText
-            android:id="@+id/edittextcontactoActualizar"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:ems="10"
-            android:hint="Contacto"
-            android:inputType="phone"
-            android:minHeight="48dp" />
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="50dp" />
+            android:layout_height="26dp" />
 
         <Button
             android:id="@+id/btnActualizarusuario"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:backgroundTint="@color/purple_500"
+            android:backgroundTint="@color/colorsecundario"
             android:text="Registrar"
             android:textColor="@color/white" />
 
