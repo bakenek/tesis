@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#54604E4E"
+    android:background="@color/fondo"
     android:backgroundTintMode="add"
     tools:context=".ui.notifications.NotificationsFragment">
 
@@ -23,7 +23,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <androidx.recyclerview.widget.RecyclerView
@@ -31,9 +31,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
-                    android:paddingLeft="12dp"
-                    android:paddingTop="10dp"
-                    android:paddingRight="12dp" />
+                    android:paddingLeft="7dp"
+                    android:paddingTop="5dp"
+                    android:paddingRight="7dp" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

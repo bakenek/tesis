@@ -29,7 +29,7 @@
             android:gravity="center"
             android:text="Registro de Usuario"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textColor="@color/purple_500" />
+            android:textColor="@color/colorsecundario" />
 
         <Space
             android:layout_width="match_parent"
@@ -96,7 +96,7 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:backgroundTint="@color/purple_500"
+            android:backgroundTint="@color/colorsecundario"
             android:text="Registrar"
             android:textColor="@color/white" />
 

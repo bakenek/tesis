@@ -34,10 +34,16 @@ public class First_layout extends AppCompatActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        setTheme(R.style.Theme_Tesis);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_sesion);
 
-        getSupportActionBar().setTitle("Inicio");
+        getSupportActionBar().setTitle("");
 
         cajauser = (EditText) findViewById(R.id.editTextTextPersonName);
         cajapwd = (EditText) findViewById(R.id.editTextTextPersonpwd);

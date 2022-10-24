@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SesionFragment">
+    tools:context=".First_layout">
 
 
     <LinearLayout
@@ -20,17 +20,17 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="105dp" />
+            android:layout_height="119dp" />
 
         <ImageView
-            android:id="@+id/imageView3"
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            app:srcCompat="@mipmap/clickinglogo" />
+            android:layout_height="70dp"
+            android:src="@drawable/clickinglogosmall" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="26dp" />
+            android:layout_height="45dp" />
 
         <EditText
             android:id="@+id/editTextTextPersonName"
@@ -71,7 +71,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="33dp" />
+            android:layout_height="75dp" />
 
         <TextView
             android:id="@+id/textView6"
@@ -79,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:text="No tienes cuenta ?"
+            android:text="¿No tienes cuenta?"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <Button
