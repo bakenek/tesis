@@ -238,6 +238,8 @@ public class ActualizarUsuario extends AppCompatActivity {
         map.put("clave",clave);
         map.put("contacto",contacto);
 
+
+
         mFirestore.collection("user").document(id).update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {

@@ -128,6 +128,7 @@ public class Registrar extends AppCompatActivity {
                 map.put("correo", emailuser);
                 map.put("clave", pasword);
                 map.put("contacto", contacto);
+                map.put("Photo","");
 
 
                 Map<String,Object> notis = new HashMap<>();

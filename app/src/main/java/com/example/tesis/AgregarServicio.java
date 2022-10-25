@@ -334,6 +334,8 @@ public class AgregarServicio extends AppCompatActivity {
         map.put("nombre", nombreServicio);
         map.put("descripcion",descripcionServicio);
         map.put("FechaDeCreacion",date);
+        map.put("Photo","");
+
 
         Map<String,Object> notis = new HashMap<>();
 

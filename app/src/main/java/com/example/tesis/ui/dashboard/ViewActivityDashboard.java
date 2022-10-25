@@ -3,23 +3,21 @@ package com.example.tesis.ui.dashboard;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.tesis.AgregarServicio;
 import com.example.tesis.MainActivity;
 import com.example.tesis.R;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,7 +33,9 @@ public class ViewActivityDashboard extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseFirestore mFirestore;
 
-    double ratingg , promedio, usuariosquevotaron;
+    Double ratingg;
+    Float promedio;
+    Float usuariosquevotaron;
 
 
    private RatingBar ratingBar;
@@ -75,7 +75,7 @@ public class ViewActivityDashboard extends AppCompatActivity {
                 String idusuario = mAuth.getCurrentUser().getUid();
                 String idEstrella = id + idusuario;
 
-                double rati = rating;
+                Double rati = Double.valueOf(rating);
 
                 Map<String,Object> map = new HashMap<>();
                 map.put("idEstrella", idEstrella);
@@ -98,9 +98,9 @@ public class ViewActivityDashboard extends AppCompatActivity {
                     }
                 });
 
+/*
 
-
-                if(ratingg != rati){
+                if(ratingg != 0){
 
                     Map<String,Object> promediorating = new HashMap<>();
 
@@ -113,7 +113,7 @@ public class ViewActivityDashboard extends AppCompatActivity {
 
 
 
-                        mFirestore.collection("promedioestrellas")
+                    mFirestore.collection("promedioestrellas")
                                 .document(id)
                                 .set(promediorating).addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
@@ -122,7 +122,7 @@ public class ViewActivityDashboard extends AppCompatActivity {
                                     }
                                 });
 
-                }
+                }*/
 
 
             }
@@ -154,39 +154,111 @@ public class ViewActivityDashboard extends AppCompatActivity {
                 String idEstrella = id + idusuario;
 
 
-                mFirestore.collection("estrellas").document(idEstrella).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+
+                mFirestore.collection("estrellas").document(idEstrella).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                        if (task.isSuccessful()) {
+                            DocumentSnapshot document = task.getResult();
+                            if (document.exists()) {
+                                mFirestore.collection("estrellas").document(idEstrella).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot2) {
+
+                                        Double estrellas = Double.valueOf(0);
+
+                                        estrellas =documentSnapshot2.getDouble("rating");
+
+                                        float setratin = estrellas.floatValue();
+                                        Float object = setratin;
+
+
+                                        if (object != null) {
+                                            setratin = estrellas.floatValue();
+                                            ratingBar.setRating(setratin);
+                                            ratingg = Double.valueOf(setratin);
+                                        } else {
+
+                                            ratingBar.setRating(0.0F);
+                                            ratingg = 0.0;
+                                        }
+
+
+
+
+                                    }
+                                });
+                            } else {
+                                Double i = Double.valueOf(0);
+                                Map<String,Object> mep= new HashMap<>();
+                                mep.put("idEstrella", idEstrella);
+                                mep.put("idservicio", id);
+                                mep.put("idusuario", idusuario);
+                                mep.put("rating", i);
+
+                                mFirestore.collection("estrellas").document(idEstrella).set(mep).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+
+                                    }
+                                });
+
+
+
+                            }
+                        } else {
+                            Toast.makeText(ViewActivityDashboard.this, "No se obtuvo el rating", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+
+
+
+                });
+
+              /*  mFirestore.collection("estrellas").document(idEstrella).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot2) {
 
-                      Double estrellas =documentSnapshot2.getDouble("rating");
+                        Double estrellas = Double.valueOf(0);
 
-                      float setratin;
+                            estrellas =documentSnapshot2.getDouble("rating");
 
-                      if(estrellas == null){
-                          setratin = 0;
-                          ratingBar.setRating(setratin);
-                          ratingg = setratin;
-                      }else{
-                          setratin = estrellas.floatValue();
-                          ratingBar.setRating(setratin);
-                          ratingg = setratin;
-                      }
+                        float setratin = estrellas.floatValue();
+                        Float object = setratin;
+
+
+                        if (object != null) {
+                            setratin = estrellas.floatValue();
+                            ratingBar.setRating(setratin);
+                            ratingg = setratin;
+                        } else {
+
+                            ratingBar.setRating(0.0F);
+                            ratingg = 0.0;
+                        }
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
+                        mFirestore.collection("estrellas").document(idEstrella).set(mep);
+
                         Toast.makeText(ViewActivityDashboard.this, "No se obtuvo el rating", Toast.LENGTH_SHORT).show();
                     }
                 });
+                */
 
 
                 mFirestore.collection("promedioestrellas").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot3) {
+
+
                      Double promedios = documentSnapshot3.getDouble("promedio");
                     // usuariosquevotaron = documentSnapshot3.getDouble("numeroVotantes");
-                     promedio = promedios;
+                     //promedio = promedios;
                     }
                 });
 

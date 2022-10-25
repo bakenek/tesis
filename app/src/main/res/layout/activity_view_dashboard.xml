@@ -52,18 +52,19 @@
 
                 <RatingBar
                     android:id="@+id/ratingBarServicio"
-                    style="@android:style/Widget.DeviceDefault.Light.RatingBar.Indicator"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:contentDescription="Califica el servicio"
                     android:numStars="5"
                     android:progressTint="@color/purple_500"
-                    android:rating="0" />
+                    android:rating="0"
+                    android:scaleX="0.8"
+                    android:scaleY="0.8" />
 
                 <Space
                     android:layout_width="match_parent"
-                    android:layout_height="18dp" />
+                    android:layout_height="10dp" />
 
                 <TextView
                     android:id="@+id/nombreserviciovista"
