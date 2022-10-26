@@ -29,12 +29,12 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ActualizarUsuario extends AppCompatActivity {
+public class sobreti extends AppCompatActivity {
 
 
     ImageView usuariofoto;
 
-    EditText cajauser, cajapwd , cajaemail,cajacontacto , cajaestudio , cajahabilidades,cajaintereses;
+    EditText  cajaestudio , cajahabilidades,cajaintereses;
 
     Button CrearServicio , regresar , eliminarfoto;
 
@@ -56,7 +56,7 @@ public class ActualizarUsuario extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.actualizar_usuario);
+        setContentView(R.layout.mas_sobre_ti);
 
         getSupportActionBar().setTitle("Editar perfil");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -67,88 +67,73 @@ public class ActualizarUsuario extends AppCompatActivity {
 
         storageReference = FirebaseStorage.getInstance().getReference();
 
-        //agregarfoto = (Button) findViewById(R.id.btnEditarUsuario);
-        eliminarfoto = (Button) findViewById(R.id.btneliminar);
+        eliminarfoto = (Button) findViewById(R.id.btneliminarsobremi);
 
-        usuariofoto = findViewById(R.id.fotoActualizaciondeUsuario);
+        usuariofoto = findViewById(R.id.fotodeUsuario);
 
 
-        cajauser = (EditText) findViewById(R.id.edittextusuarioActualizar);
-        cajapwd = (EditText) findViewById(R.id.edittextclaveActualizar);
-        cajaemail = (EditText) findViewById(R.id.edittexEmailActualizar);
-        cajacontacto = (EditText) findViewById(R.id.edittextcontactoActualizar);
-
-        cajaestudio = (EditText) findViewById(R.id.editTextEstudiosActualizar);
-        cajahabilidades = (EditText) findViewById(R.id.editTextHabilidadesActualizar);
-        cajaintereses  = (EditText) findViewById(R.id.editTextInteresesActualizar);
+        cajaestudio = (EditText) findViewById(R.id.editTextEstudios);
+        cajahabilidades = (EditText) findViewById(R.id.editTextHabilidades);
+        cajaintereses  = (EditText) findViewById(R.id.editTextIntereses);
 
 
 
-        CrearServicio = (Button) findViewById(R.id.btnActualizarusuario);
-        regresar= (Button) findViewById(R.id.btnActualizarregresar);
-        progressBar = findViewById(R.id.progressBar2);
+        CrearServicio = (Button) findViewById(R.id.btncontinuar);
+        regresar= (Button) findViewById(R.id.btnomitir);
+        progressBar = findViewById(R.id.progressBar5);
 
-            CrearServicio.setText("Actualizar");
-            getservvicio(id);
+        CrearServicio.setText("Actualizar");
+        getservvicio(id);
 
 
 
-       usuariofoto.setOnClickListener(new View.OnClickListener() {
+        usuariofoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              uploadPhoto();
-          }
+                uploadPhoto();
+            }
         });
 
 
         eliminarfoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                HashMap<String, Object>map = new HashMap<>();
+                HashMap<String, Object> map = new HashMap<>();
                 map.put("Photo","");
                 mFirestore.collection("user").document(id).update(map);
-                Toast.makeText(ActualizarUsuario.this,"Foto eliminada", Toast.LENGTH_SHORT).show();
+                Toast.makeText(sobreti.this,"Foto eliminada", Toast.LENGTH_SHORT).show();
 
             }
         });
 
 
-            CrearServicio.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String nombreServicio = cajauser.getText().toString().trim();
-                    String email = cajaemail.getText().toString().trim();
-                    String clave = cajapwd.getText().toString().trim();
-                    String contacto = cajacontacto.getText().toString().trim();
-                    String estudios = cajaestudio.getText().toString().trim();
-                    String habilidades = cajahabilidades.getText().toString().trim();
-                    String intereses = cajaintereses.getText().toString().trim();
+        CrearServicio.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-
-                    if(nombreServicio.isEmpty() && email.isEmpty()
-                            && clave.isEmpty() && contacto.isEmpty()){
-
-                        Toast.makeText(ActualizarUsuario.this, "Error al cargar datos", Toast.LENGTH_SHORT).show();
-
-                    }else{
-
-                        Actualizarservicio(nombreServicio,email,clave,contacto, id , estudios , habilidades,intereses);
-
-
-                    }
+                String estudios = cajaestudio.getText().toString().trim();
+                String habilidades = cajahabilidades.getText().toString().trim();
+                String intereses = cajaintereses.getText().toString().trim();
 
 
 
-                }
-            });
+                Actualizarservicio(id , estudios , habilidades,intereses);
 
-            regresar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    finish();
-                    startActivity(new Intent(ActualizarUsuario.this, MainActivity.class));
-                }
-            });
+
+
+
+
+
+            }
+        });
+
+        regresar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+                startActivity(new Intent(sobreti.this, MainActivity.class));
+            }
+        });
 
 
     }
@@ -202,7 +187,7 @@ public class ActualizarUsuario extends AppCompatActivity {
                                 HashMap<String, Object> map = new HashMap<>();
                                 map.put("Photo", dowload_uri );
                                 mFirestore.collection("user").document(idd).update(map);
-                                Toast.makeText(ActualizarUsuario.this, "Foto Actualizada", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(sobreti.this, "Foto Actualizada", Toast.LENGTH_SHORT).show();
 
                                 progressBar.setVisibility(View.INVISIBLE);
                             }
@@ -216,7 +201,7 @@ public class ActualizarUsuario extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(ActualizarUsuario.this, "Error al cargar foto", Toast.LENGTH_SHORT).show();
+                Toast.makeText(sobreti.this, "Error al cargar foto", Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.INVISIBLE);
             }
         });
@@ -233,14 +218,10 @@ public class ActualizarUsuario extends AppCompatActivity {
 
 
 
-    private void Actualizarservicio(String nombreServicio, String email, String clave, String contacto,
-                                    String id, String estudios, String habilidades, String intereses) {
+    private void Actualizarservicio(String id, String estudios, String habilidades, String intereses) {
         Map<String,Object> map = new HashMap<>();
 
-        map.put("nombre", nombreServicio);
-        map.put("correo",email);
-        map.put("clave",clave);
-        map.put("contacto",contacto);
+
         map.put("estudios",estudios);
         map.put("habilidades",habilidades);
         map.put("intereses",intereses);
@@ -251,7 +232,7 @@ public class ActualizarUsuario extends AppCompatActivity {
         mFirestore.collection("user").document(id).update(map).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
-                Toast.makeText(ActualizarUsuario.this, "Actualizado Exitosamente", Toast.LENGTH_SHORT).show();
+                Toast.makeText(sobreti.this, "Actualizado Exitosamente", Toast.LENGTH_SHORT).show();
                 finish();
 
 
@@ -260,7 +241,7 @@ public class ActualizarUsuario extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(ActualizarUsuario.this, "Error al Actualizar", Toast.LENGTH_SHORT).show();
+                Toast.makeText(sobreti.this, "Error al Actualizar", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -274,19 +255,12 @@ public class ActualizarUsuario extends AppCompatActivity {
         mFirestore.collection("user").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
-                String nombreServicio = documentSnapshot.getString("nombre");
-                String email = documentSnapshot.getString("correo");
-                String clave = documentSnapshot.getString("clave");
-                String contacto = documentSnapshot.getString("contacto");
+
                 String fotouser = documentSnapshot.getString("Photo");
                 String estudios = documentSnapshot.getString("estudios");
                 String habilidades= documentSnapshot.getString("habilidades");
                 String intereses= documentSnapshot.getString("intereses");
 
-                cajauser.setText(nombreServicio);
-                cajapwd.setText(clave);
-                cajaemail.setText(email);
-                cajacontacto.setText(contacto);
                 cajaestudio.setText(estudios);
                 cajahabilidades.setText(habilidades);
                 cajaintereses.setText(intereses);
@@ -297,7 +271,7 @@ public class ActualizarUsuario extends AppCompatActivity {
                 try {
                     if(!fotouser.equals("")){
 
-                        Picasso.with(ActualizarUsuario.this)
+                        Picasso.with(sobreti.this)
                                 .load(fotouser)
                                 .resize(150,150)
                                 .into(usuariofoto);
@@ -306,7 +280,7 @@ public class ActualizarUsuario extends AppCompatActivity {
 
                 }catch (Exception e){
                     Log.v("Error", "e: "+ e);
-                    Toast.makeText(ActualizarUsuario.this,"Error", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(sobreti.this,"Error", Toast.LENGTH_SHORT).show();
 
 
 
@@ -319,7 +293,7 @@ public class ActualizarUsuario extends AppCompatActivity {
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(ActualizarUsuario.this, "Error al Obtener los Datos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(sobreti.this, "Error al Obtener los Datos", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -329,7 +303,7 @@ public class ActualizarUsuario extends AppCompatActivity {
     @Override
     public boolean onSupportNavigateUp() {
         finish();
-        startActivity(new Intent(ActualizarUsuario.this,MainActivity.class));
+        startActivity(new Intent(sobreti.this,MainActivity.class));
         //onBackPressed();
         return false;
     }

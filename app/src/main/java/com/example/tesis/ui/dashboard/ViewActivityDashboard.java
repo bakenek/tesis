@@ -34,8 +34,9 @@ public class ViewActivityDashboard extends AppCompatActivity {
     FirebaseFirestore mFirestore;
 
     Double ratingg;
-    Float promedio;
-    Float usuariosquevotaron;
+    Double promedio;
+    Double usuariosquevotaron;
+    Boolean voto;
 
 
    private RatingBar ratingBar;
@@ -77,11 +78,14 @@ public class ViewActivityDashboard extends AppCompatActivity {
 
                 Double rati = Double.valueOf(rating);
 
+
                 Map<String,Object> map = new HashMap<>();
                 map.put("idEstrella", idEstrella);
                 map.put("idservicio", id);
                 map.put("idusuario", idusuario);
                 map.put("rating", rati);
+                map.put("voto", true);
+
 
 
                 mFirestore.collection("estrellas").document(idEstrella).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -97,33 +101,6 @@ public class ViewActivityDashboard extends AppCompatActivity {
                         Toast.makeText(ViewActivityDashboard.this, "Error al calificar Servicio", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-/*
-
-                if(ratingg != 0){
-
-                    Map<String,Object> promediorating = new HashMap<>();
-
-                    usuariosquevotaron +=  1;
-                    Double promedionuevo = promedio + rati -ratingg ;
-                    promediorating.put("promedio", promedionuevo);
-                    promediorating.put("numeroVotantes", usuariosquevotaron);
-
-
-
-
-
-                    mFirestore.collection("promedioestrellas")
-                                .document(id)
-                                .set(promediorating).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                    @Override
-                                    public void onSuccess(Void unused) {
-
-                                    }
-                                });
-
-                }*/
-
 
             }
    });
@@ -169,6 +146,7 @@ public class ViewActivityDashboard extends AppCompatActivity {
                                         Double estrellas = Double.valueOf(0);
 
                                         estrellas =documentSnapshot2.getDouble("rating");
+                                        voto = documentSnapshot2.getBoolean("voto");
 
                                         float setratin = estrellas.floatValue();
                                         Float object = setratin;
@@ -196,6 +174,7 @@ public class ViewActivityDashboard extends AppCompatActivity {
                                 mep.put("idservicio", id);
                                 mep.put("idusuario", idusuario);
                                 mep.put("rating", i);
+                                mep.put("voto", false);
 
                                 mFirestore.collection("estrellas").document(idEstrella).set(mep).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
@@ -216,55 +195,6 @@ public class ViewActivityDashboard extends AppCompatActivity {
 
 
                 });
-
-              /*  mFirestore.collection("estrellas").document(idEstrella).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot2) {
-
-                        Double estrellas = Double.valueOf(0);
-
-                            estrellas =documentSnapshot2.getDouble("rating");
-
-                        float setratin = estrellas.floatValue();
-                        Float object = setratin;
-
-
-                        if (object != null) {
-                            setratin = estrellas.floatValue();
-                            ratingBar.setRating(setratin);
-                            ratingg = setratin;
-                        } else {
-
-                            ratingBar.setRating(0.0F);
-                            ratingg = 0.0;
-                        }
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        mFirestore.collection("estrellas").document(idEstrella).set(mep);
-
-                        Toast.makeText(ViewActivityDashboard.this, "No se obtuvo el rating", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                */
-
-
-                mFirestore.collection("promedioestrellas").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-                    @Override
-                    public void onSuccess(DocumentSnapshot documentSnapshot3) {
-
-
-                     Double promedios = documentSnapshot3.getDouble("promedio");
-                    // usuariosquevotaron = documentSnapshot3.getDouble("numeroVotantes");
-                     //promedio = promedios;
-                    }
-                });
-
-
-
-
 
 
                 try {

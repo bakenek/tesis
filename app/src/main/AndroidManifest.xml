@@ -29,6 +29,9 @@
             android:name=".Registrar"
             android:exported="true"></activity>
         <activity
+            android:name=".sobreti"
+            android:exported="true"></activity>
+        <activity
             android:name=".AgregarServicio"
             android:exported="true"></activity>
         <activity

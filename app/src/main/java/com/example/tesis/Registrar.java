@@ -129,6 +129,9 @@ public class Registrar extends AppCompatActivity {
                 map.put("clave", pasword);
                 map.put("contacto", contacto);
                 map.put("Photo","");
+                map.put("estudios","");
+                map.put("habilidades","");
+                map.put("intereses","");
 
 
                 Map<String,Object> notis = new HashMap<>();
@@ -156,7 +159,7 @@ public class Registrar extends AppCompatActivity {
                                 cajauser.getText().toString(),Toast.LENGTH_SHORT).show();
 
                         finish();
-                        startActivity(new Intent(Registrar.this,MainActivity.class));
+                        startActivity(new Intent(Registrar.this,sobreti.class));
 
                     }
                 }).addOnFailureListener(new OnFailureListener() {

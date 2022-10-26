@@ -1,5 +1,6 @@
 package com.example.tesis;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -8,6 +9,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
@@ -60,6 +63,9 @@ public class AgregarServicio extends AppCompatActivity {
     private Uri image_url;
     String photo = "photo";
     String idd ,idservicio;
+    ProgressBar progressBar;
+
+
 
 
 
@@ -87,6 +93,7 @@ public class AgregarServicio extends AppCompatActivity {
 
         eliminarfoto =(Button) findViewById(R.id.btneliminarfotoseervi);
         eliminarservicio =(Button) findViewById(R.id.btnborrarservicio);
+        progressBar = findViewById(R.id.progressBar3);
 
 
         if(id == null || id == ""){
@@ -236,6 +243,7 @@ public class AgregarServicio extends AppCompatActivity {
     }
 
     private void subirPhoto(Uri image_url) {
+        progressBar.setVisibility(View.VISIBLE);
 
         idd= mAuth.getCurrentUser().getUid();
 
@@ -259,6 +267,7 @@ public class AgregarServicio extends AppCompatActivity {
                                 mFirestore.collection("servicio").document(idservicio).update(map);
                                 Toast.makeText(AgregarServicio.this, "Foto Actualizada", Toast.LENGTH_SHORT).show();
 
+                                progressBar.setVisibility(View.INVISIBLE);
                             }
                         });
 
@@ -271,6 +280,7 @@ public class AgregarServicio extends AppCompatActivity {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(AgregarServicio.this, "Error al cargar foto", Toast.LENGTH_SHORT).show();
+                progressBar.setVisibility(View.INVISIBLE);
             }
         });
 

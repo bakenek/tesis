@@ -47,7 +47,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="110dp"
                     android:layout_gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingLeft="55dp">
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
@@ -82,6 +83,16 @@
                     </LinearLayout>
 
                 </LinearLayout>
+
+                <ProgressBar
+                    android:id="@+id/progressBar2"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="110dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:indeterminate="true"
+                    android:progressTint="@color/purple_500"
+                    android:visibility="invisible" />
 
                 <Space
                     android:layout_width="match_parent"
@@ -144,7 +155,7 @@
                     android:layout_height="25dp" />
 
                 <EditText
-                    android:id="@+id/editTextTextMultiLine"
+                    android:id="@+id/editTextEstudiosActualizar"
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -159,7 +170,7 @@
                     android:layout_height="25dp" />
 
                 <EditText
-                    android:id="@+id/editTextTextMultiLine2"
+                    android:id="@+id/editTextHabilidadesActualizar"
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -174,7 +185,7 @@
                     android:layout_height="25dp" />
 
                 <EditText
-                    android:id="@+id/editTextTextMultiLine3"
+                    android:id="@+id/editTextInteresesActualizar"
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
