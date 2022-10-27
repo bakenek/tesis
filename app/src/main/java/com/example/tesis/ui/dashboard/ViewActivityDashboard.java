@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.tesis.MainActivity;
 import com.example.tesis.R;
+import com.example.tesis.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -29,15 +31,14 @@ import java.util.Map;
 public class ViewActivityDashboard extends AppCompatActivity {
 
     ImageView imageView;
-    TextView titulo, descripcion, textviewgeneral;
+    TextView titulo, descripcion, textviewgeneral,usuario;
     FirebaseAuth mAuth;
     FirebaseFirestore mFirestore;
 
     Double ratingg;
-    Double promedio;
-    Double usuariosquevotaron;
     Boolean voto;
 
+    String creadorid;
 
    private RatingBar ratingBar;
 
@@ -56,6 +57,7 @@ public class ViewActivityDashboard extends AppCompatActivity {
         textviewgeneral = findViewById(R.id.TextViewcreadoFechaContacto);
         titulo = findViewById(R.id.nombreserviciovista);
         descripcion = findViewById(R.id.descipcionserviciovista);
+        usuario = findViewById(R.id.TextViewiraperfilusuario);
 
         imageView = findViewById(R.id.imageViewserviciovista);
        ratingBar = findViewById(R.id.ratingBarServicio);
@@ -68,6 +70,20 @@ public class ViewActivityDashboard extends AppCompatActivity {
 
         } else {
             getservvicio(id);
+
+
+            usuario.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    Intent i = new Intent(ViewActivityDashboard.this
+                            , User.class);
+                    i.putExtra("idcreador", creadorid);
+                    startActivity(i);
+
+
+                }
+            });
 
         ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
             @Override
@@ -92,7 +108,7 @@ public class ViewActivityDashboard extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void unused) {
 
-                        Toast.makeText(ViewActivityDashboard.this, "Calificaste el servcio con: "+ rating, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(ViewActivityDashboard.this, "Calificaste el servcio con: "+ rating, Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -129,6 +145,7 @@ public class ViewActivityDashboard extends AppCompatActivity {
                 String fotoservicio = documentSnapshot.getString("Photo");
                 String idusuario = mAuth.getCurrentUser().getUid();
                 String idEstrella = id + idusuario;
+                creadorid = idcreador;
 
 
 
@@ -226,13 +243,9 @@ public class ViewActivityDashboard extends AppCompatActivity {
                         String contactoCreador = documentSnapshot.getString("contacto");
                         String correoCreador = documentSnapshot.getString("correo");
 
-
-
-
-
-                        textviewgeneral.setText("Creado por: "+ nombreCreador + "\n"
-                                + "Fecha de publicacion: " + FechaDeCreacionServicio + "\n"
-                                + "Contacto: " + contactoCreador  + "\n" + "Correo: " + correoCreador
+                        usuario.setText(nombreCreador);
+                        textviewgeneral.setText(  "Correo: " +  correoCreador + "\n"
+                                + "Contacto: " + contactoCreador  + "\n" + "Fecha de publicacion: " + FechaDeCreacionServicio
                         );
 
                     }

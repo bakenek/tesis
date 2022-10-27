@@ -22,6 +22,9 @@
             android:exported="true"
             android:label="@string/app_name"></activity>
         <activity
+            android:name=".User"
+            android:exported="true"></activity>
+        <activity
             android:name=".ActualizarUsuario"
             android:exported="true"
             android:label="@string/app_name"></activity>
@@ -33,6 +36,9 @@
             android:exported="true"></activity>
         <activity
             android:name=".AgregarServicio"
+            android:exported="true"></activity>
+        <activity
+            android:name=".serviciosdelusuario"
             android:exported="true"></activity>
         <activity
             android:name=".First_layout"

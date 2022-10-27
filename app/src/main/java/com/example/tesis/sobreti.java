@@ -59,7 +59,7 @@ public class sobreti extends AppCompatActivity {
         setContentView(R.layout.mas_sobre_ti);
 
         getSupportActionBar().setTitle("Editar perfil");
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();

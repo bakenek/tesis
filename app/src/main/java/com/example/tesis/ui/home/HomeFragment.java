@@ -36,7 +36,7 @@ public class HomeFragment extends Fragment {
     Button cerrarsesion, perfil;
     ImageView fotoudesuario;
 
-    TextView nombre;
+    TextView nombre , correo, contacto,estudios,habilidades,intereses;
 
     FirebaseAuth mAuth;
     FirebaseFirestore mFirestore;
@@ -63,12 +63,20 @@ public class HomeFragment extends Fragment {
         mFirestore = FirebaseFirestore.getInstance();
 
         cerrarsesion = root.findViewById(R.id.btncerrarsesion);
+
         nombre = root.findViewById(R.id.nombredeusuario);
+        correo = root.findViewById(R.id.TextViewcorreohome);
+        contacto = root.findViewById(R.id.TextViewcontactohome);
+        estudios = root.findViewById(R.id.TextViewestudioshome);
+        habilidades = root.findViewById(R.id.TextViewhabilidadeshome);
+        intereses = root.findViewById(R.id.TextViewintereseshome);
+
+
+
         perfil = root.findViewById(R.id.datosdeusuatio);
         fotoudesuario = root.findViewById(R.id.fotoUsuario);
 
         obtenerdatos();
-
 
         perfil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,9 +109,26 @@ public class HomeFragment extends Fragment {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if(documentSnapshot.exists()){
-                    String usuario = documentSnapshot.getString("nombre");
                     String fotouser = documentSnapshot.getString("Photo");
+
+                    String usuario = documentSnapshot.getString("nombre");
+                    String correouser = documentSnapshot.getString("correo");
+                    String contactouser = documentSnapshot.getString("contacto");
+                    String estudiosuser= documentSnapshot.getString("estudios");
+                    String habilidadesuser = documentSnapshot.getString("habilidades");
+                    String interesesuser = documentSnapshot.getString("estudios");
+
                     nombre.setText(usuario);
+                    correo.setText(correouser);
+                    contacto.setText(contactouser);
+                    estudios.setText(estudiosuser);
+                    habilidades.setText(habilidadesuser);
+                    intereses.setText(interesesuser);
+
+
+
+
+
                     try {
                         if(!fotouser.equals("")){
 
