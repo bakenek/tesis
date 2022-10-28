@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#54D1D1D1"
-    android:backgroundTint="@color/fondo"
+    android:background="@color/white"
+    android:backgroundTint="@color/white"
     android:backgroundTintMode="add"
     tools:context=".ui.home.HomeFragment">
 
@@ -34,6 +34,10 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15dp" />
+
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
@@ -41,10 +45,6 @@
             android:background="#FFFFFF"
             android:orientation="vertical">
 
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="10dp" />
 
             <androidx.cardview.widget.CardView
                 android:layout_width="100dp"
@@ -252,21 +252,41 @@
                     android:layout_height="200dp"
                     android:layout_weight="1" />
 
-                <Button
-                    android:id="@+id/datosdeusuatio"
-                    android:layout_width="match_parent"
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:backgroundTint="@color/white"
-                    android:text="Editar Perfil"
-                    android:textSize="16sp" />
+                    android:layout_weight="1"
+                    android:background="@color/colorsecundario"
+                    android:backgroundTint="@color/colorsecundario"
+                    app:cardCornerRadius="30dp">
+
+                    <Button
+                        android:id="@+id/datosdeusuatio"
+                        android:layout_width="250dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:backgroundTint="@color/colorsecundario"
+                        android:outlineAmbientShadowColor="@color/colorsecundario"
+                        android:outlineSpotShadowColor="@color/colorsecundario"
+                        android:text="Editar Perfil"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                </androidx.cardview.widget.CardView>
 
                 <Button
                     android:id="@+id/btncerrarsesion"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:backgroundTint="@color/white"
+                    android:outlineAmbientShadowColor="@color/white"
+                    android:outlineSpotShadowColor="@color/white"
+                    android:shadowColor="@color/white"
                     android:text="Cerrar Sesion"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                    android:textColor="@color/purple_500"
                     android:textSize="16sp" />
 
             </LinearLayout>

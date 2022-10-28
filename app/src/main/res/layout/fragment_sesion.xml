@@ -60,18 +60,30 @@
             android:layout_width="match_parent"
             android:layout_height="73dp" />
 
-        <Button
-            android:id="@+id/btnIniciarSesion"
-            android:layout_width="228dp"
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:background="@color/colorsecundario"
             android:backgroundTint="@color/colorsecundario"
-            android:text="Iniciar Sesion"
-            android:textColor="@color/white" />
+            app:cardCornerRadius="30dp">
+
+            <Button
+                android:id="@+id/btnIniciarSesion"
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/colorsecundario"
+                android:outlineAmbientShadowColor="@color/colorsecundario"
+                android:outlineSpotShadowColor="@color/colorsecundario"
+                android:text="Iniciar Sesion"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/white" />
+        </androidx.cardview.widget.CardView>
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="75dp" />
+            android:layout_height="63dp" />
 
         <TextView
             android:id="@+id/textView6"

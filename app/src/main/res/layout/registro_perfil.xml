@@ -91,14 +91,25 @@
             android:layout_width="match_parent"
             android:layout_height="50dp" />
 
-        <Button
-            android:id="@+id/btnregistrarusuario"
-            android:layout_width="300dp"
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:background="@color/colorsecundario"
             android:backgroundTint="@color/colorsecundario"
-            android:text="Registrar"
-            android:textColor="@color/white" />
+            app:cardCornerRadius="30dp">
+
+            <Button
+                android:id="@+id/btnregistrarusuario"
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/colorsecundario"
+                android:outlineAmbientShadowColor="@color/colorsecundario"
+                android:outlineSpotShadowColor="@color/colorsecundario"
+                android:text="Registrar"
+                android:textColor="@color/white" />
+        </androidx.cardview.widget.CardView>
 
         <Button
             android:id="@+id/btnregresar"
