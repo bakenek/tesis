@@ -35,6 +35,8 @@ public class DashboardFragment extends Fragment {
 
     SearchView searchView;
 
+    Button prueba, filtroestrellas,filtrosolicitados,filtroprovedores;
+
     RecyclerView mRecycler;
     ServicioAdapterdasboard mAdapter;
 
@@ -63,6 +65,8 @@ public class DashboardFragment extends Fragment {
         searchView = root.findViewById(R.id.Search);
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
+        prueba = root.findViewById(R.id.buttonprueba);
+        filtroestrellas = root.findViewById(R.id.filtroestrellas);
 
 
 
@@ -71,11 +75,27 @@ public class DashboardFragment extends Fragment {
         setUApRecyclerView(root);
         search_View();
 
+        prueba.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pruebameto();
+            }
+        });
+
+        filtroestrellas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {filtroporpromedio();   }
+        });
+
 
 
         return root;
 
     }
+
+
+
+
     @SuppressLint("NotifyDataSetChanged")
     private void setUApRecyclerView(View root) {
         mRecycler = root.findViewById(R.id.RecyclerViewServiciosdasboard);
@@ -123,6 +143,30 @@ public class DashboardFragment extends Fragment {
         mAdapter = new ServicioAdapterdasboard(firestoreRecyclerOptions,getActivity());
         mAdapter.startListening();
         mRecycler.setAdapter(mAdapter);
+
+
+
+    }
+
+
+    private void pruebameto() {
+        Query query = mFirestore.collection("servicio");
+
+
+        FirestoreRecyclerOptions<Servicio> firestoreRecyclerOptions =
+                new FirestoreRecyclerOptions.Builder<Servicio>()
+                        .setQuery(query.orderBy("FechaDeCreacion", Query.Direction.DESCENDING), Servicio.class).build();
+
+
+        mAdapter = new ServicioAdapterdasboard(firestoreRecyclerOptions,getActivity());
+        mAdapter.startListening();
+
+        mRecycler.setAdapter(mAdapter);
+
+
+    }
+
+    private void filtroporpromedio() {
 
 
 

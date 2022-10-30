@@ -62,7 +62,7 @@ public class AgregarServicio extends AppCompatActivity {
 
     private Uri image_url;
     String photo = "photo";
-    String idd ,idservicio;
+    String idd ,idservicio,idusuario,idestrellas ;
     ProgressBar progressBar;
 
 
@@ -83,6 +83,8 @@ public class AgregarServicio extends AppCompatActivity {
         mFirestore = FirebaseFirestore.getInstance();
         String id = getIntent().getStringExtra("id_servicio");
         idservicio = id;
+        idusuario = mAuth.getCurrentUser().getUid();
+        idestrellas = id + idusuario;
 
         fotoservicio = findViewById(R.id.imageViewserviciovista);
 
@@ -199,6 +201,18 @@ public class AgregarServicio extends AppCompatActivity {
         mFirestore.collection("servicio").document(id).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void unused) {
+
+                mFirestore.collection("estrellas").document(idestrellas).delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+
+                    }
+                });
+
+
+                Toast.makeText(AgregarServicio.this, "Servicio eliminado exitosamente", Toast.LENGTH_SHORT).show();
+
+
                 FragmentManager manager = getSupportFragmentManager();
                 Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.navigation_actividad);
                 FragmentTransaction transaction = manager.beginTransaction();
@@ -337,7 +351,7 @@ public class AgregarServicio extends AppCompatActivity {
 
         String id = mAuth.getCurrentUser().getUid();
         String date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
-
+        Double i = Double.valueOf(0);
         Map<String,Object> map = new HashMap<>();
 
         map.put("iddelcreador", id);
@@ -345,6 +359,8 @@ public class AgregarServicio extends AppCompatActivity {
         map.put("descripcion",descripcionServicio);
         map.put("FechaDeCreacion",date);
         map.put("Photo","");
+        map.put("promedio", i);
+        map.put("votantes", i);
 
 
         Map<String,Object> notis = new HashMap<>();

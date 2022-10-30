@@ -7,14 +7,19 @@ public class Servicio {
     String FechaDeCreacion;
     String Photo;
 
+    Double promedio;
+    Double votantes;
+
     public Servicio(){}
 
-    public Servicio(String nombre, String descripcion, String iddelcreador, String fechaDeCreacion , String photo) {
+    public Servicio(String nombre, String descripcion, String iddelcreador, String fechaDeCreacion , String photo, Double promedio , Double votantes) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.iddelcreador = iddelcreador;
         this.FechaDeCreacion = fechaDeCreacion;
         this.Photo = photo;
+        this.promedio = promedio;
+        this.votantes = votantes;
     }
 
     public String getNombre() {
@@ -52,5 +57,24 @@ public class Servicio {
     public String getPhoto() {return Photo;}
 
     public void setPhoto(String photo) {Photo = photo;}
+
+    public Double getPromedio() {
+        return promedio;
+    }
+
+    public void setPromedio(Double promedio) {
+        this.promedio = promedio;
+    }
+
+    public Double getVotantes() {
+        return votantes;
+    }
+
+    public void setVotantes(Double votantes) {
+        this.votantes = votantes;
+    }
+
+
+
 
 }

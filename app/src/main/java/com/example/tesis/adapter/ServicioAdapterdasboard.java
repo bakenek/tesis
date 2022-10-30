@@ -54,6 +54,9 @@ public class ServicioAdapterdasboard extends FirestoreRecyclerAdapter<Servicio, 
         holder.nombre.setText(model.getNombre());
         holder.descripcion.setText(model.getDescripcion());
         String fotoservicio = model.getPhoto();
+        Double promedio = model.getPromedio();
+        Double votantes = model.getVotantes();
+
 
 
         try {

@@ -31,7 +31,7 @@ import java.util.Map;
 public class ViewActivityDashboard extends AppCompatActivity {
 
     ImageView imageView;
-    TextView titulo, descripcion, textviewgeneral,usuario;
+    TextView titulo, descripcion, textviewgeneral,usuario , textviewpromedio;
     FirebaseAuth mAuth;
     FirebaseFirestore mFirestore;
 
@@ -39,6 +39,7 @@ public class ViewActivityDashboard extends AppCompatActivity {
     Boolean voto;
 
     String creadorid;
+    Double promedio , votante ;
 
    private RatingBar ratingBar;
 
@@ -55,6 +56,7 @@ public class ViewActivityDashboard extends AppCompatActivity {
         String id = getIntent().getStringExtra("id_serviciodasboard");
 
         textviewgeneral = findViewById(R.id.TextViewcreadoFechaContacto);
+        textviewpromedio = findViewById(R.id.textViewpromedio);
         titulo = findViewById(R.id.nombreserviciovista);
         descripcion = findViewById(R.id.descipcionserviciovista);
         usuario = findViewById(R.id.TextViewiraperfilusuario);
@@ -108,7 +110,77 @@ public class ViewActivityDashboard extends AppCompatActivity {
                     @Override
                     public void onSuccess(Void unused) {
 
-                        //Toast.makeText(ViewActivityDashboard.this, "Calificaste el servcio con: "+ rating, Toast.LENGTH_SHORT).show();
+
+                        mFirestore.collection("estrellas").document(idEstrella).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                            @Override
+                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                mFirestore.collection("servicio").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                                        if (task.isSuccessful()) {
+                                            DocumentSnapshot document = task.getResult();
+                                            if (document.exists()) {
+
+                                                mFirestore.collection("servicio").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                    @Override
+                                                    public void onSuccess(DocumentSnapshot documentSnapshot2) {
+
+                                                       Double prom = documentSnapshot2.getDouble("promedio");
+                                                       Double vot = documentSnapshot2.getDouble("votantes");
+                                                       Double promedi, votant;
+
+                                                        Toast.makeText(ViewActivityDashboard.this, "voto" + voto, Toast.LENGTH_SHORT).show();
+
+                                                        if(voto == true){
+                                                            promedi = prom - ratingg + rati;
+                                                            votant= vot;
+                                                            ratingg = rati;
+                                                        }
+                                                        else{
+                                                            promedi = prom + rati;
+                                                             votant = vot + 1;
+                                                            ratingg = rati;
+                                                            voto = true;
+
+                                                            Toast.makeText(ViewActivityDashboard.this,
+                                                                    "Diste "+ rati + " estrellas", Toast.LENGTH_SHORT).show();
+                                                        }
+
+
+                                                        textviewpromedio.setText("Promedio : "+ promedi/votant);
+
+                                                        Map<String,Object> p= new HashMap<>();
+                                                        p.put("promedio", promedi);
+                                                        p.put("votantes", votant);
+
+
+                                                        mFirestore.collection("servicio").document(id).update(p).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                            @Override
+                                                            public void onSuccess(Void unused) { voto = true; }
+                                                        }).addOnFailureListener(new OnFailureListener() {
+                                                            @Override
+                                                            public void onFailure(@NonNull Exception e) {
+                                                            }
+                                                        });
+
+
+
+                                                    }
+                                                });
+
+                                            }
+                                        }else{
+
+                                        }
+
+                                    }
+                                });
+
+
+                            }
+                        });
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -192,6 +264,11 @@ public class ViewActivityDashboard extends AppCompatActivity {
                                 mep.put("idusuario", idusuario);
                                 mep.put("rating", i);
                                 mep.put("voto", false);
+
+
+                                voto = false;
+                                ratingBar.setRating(0.0F);
+                                ratingg = Double.valueOf(i);
 
                                 mFirestore.collection("estrellas").document(idEstrella).set(mep).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override

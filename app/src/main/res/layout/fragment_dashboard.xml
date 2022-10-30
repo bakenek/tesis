@@ -44,6 +44,139 @@
             </SearchView>
         </androidx.cardview.widget.CardView>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbarSize="0dp"
+                android:scrollbarStyle="insideInset">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="4dp">
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="300dp">
+
+                        <Button
+                            android:id="@+id/buttonprueba"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@color/fondo"
+                            android:backgroundTint="@color/fondo"
+                            android:backgroundTintMode="add"
+                            android:text="Fecha"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <Space
+                        android:layout_width="7dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:cardCornerRadius="300dp">
+
+                        <Button
+                            android:id="@+id/filtroestrellas"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/fondo"
+                            android:backgroundTint="@color/fondo"
+                            android:backgroundTintMode="add"
+                            android:paddingLeft="7dp"
+                            android:paddingRight="7dp"
+                            android:text="Mas calificados"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <Space
+                        android:layout_width="7dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="300dp">
+
+                        <Button
+                            android:id="@+id/filtrosolicitados"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/fondo"
+                            android:backgroundTint="@color/fondo"
+                            android:backgroundTintMode="screen"
+                            android:paddingLeft="7dp"
+                            android:paddingRight="7dp"
+                            android:text="Mas Soliciatos"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <Space
+                        android:layout_width="7dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="300dp">
+
+                        <Button
+                            android:id="@+id/filtrousuarios"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/fondo"
+                            android:backgroundTint="@color/fondo"
+                            android:backgroundTintMode="add"
+                            android:paddingLeft="7dp"
+                            android:paddingRight="7dp"
+                            android:text="Provedores"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+                    </androidx.cardview.widget.CardView>
+
+                    <Space
+                        android:layout_width="7dp"
+                        android:layout_height="match_parent" />
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:backgroundTint="@color/fondo"
+                        android:backgroundTintMode="screen"
+                        app:cardCornerRadius="300dp">
+
+                        <Button
+                            android:id="@+id/buttonprueba2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/fondo"
+                            android:paddingLeft="7dp"
+                            android:paddingRight="7dp"
+                            android:text="Mas Estrellas"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+        </LinearLayout>
+
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">

@@ -110,8 +110,6 @@ public class User extends AppCompatActivity {
 
                     }catch (Exception e){
                         Log.v("Error", "e: "+ e);
-                        Toast.makeText(User.this,"Error", Toast.LENGTH_SHORT).show();
-
 
 
                     }
