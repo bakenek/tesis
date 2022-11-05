@@ -361,6 +361,8 @@ public class AgregarServicio extends AppCompatActivity {
         map.put("Photo","");
         map.put("promedio", i);
         map.put("votantes", i);
+        map.put("estrellas", i);
+
 
 
         Map<String,Object> notis = new HashMap<>();

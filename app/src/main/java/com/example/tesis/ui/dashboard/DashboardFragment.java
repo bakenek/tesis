@@ -20,8 +20,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.tesis.R;
 import com.example.tesis.adapter.ServicioAdapter;
 import com.example.tesis.adapter.ServicioAdapterdasboard;
+import com.example.tesis.adapter.usuarioAdapter;
 import com.example.tesis.databinding.FragmentDashboardBinding;
 import com.example.tesis.model.Servicio;
+import com.example.tesis.model.usuario;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -35,10 +37,11 @@ public class DashboardFragment extends Fragment {
 
     SearchView searchView;
 
-    Button prueba, filtroestrellas,filtrosolicitados,filtroprovedores;
+    Button prueba, filtroestrellas,filtrosolicitados,filtroprovedores, filtrocalificados;
 
     RecyclerView mRecycler;
     ServicioAdapterdasboard mAdapter;
+    usuarioAdapter nadapter;
 
     FirebaseAuth mAuth;
     FirebaseFirestore mFirestore;
@@ -67,6 +70,8 @@ public class DashboardFragment extends Fragment {
         mFirestore = FirebaseFirestore.getInstance();
         prueba = root.findViewById(R.id.buttonprueba);
         filtroestrellas = root.findViewById(R.id.filtroestrellas);
+        filtrocalificados = root.findViewById(R.id.filtrocalificados);
+        filtroprovedores = root.findViewById(R.id.filtrousuarios);
 
 
 
@@ -82,9 +87,24 @@ public class DashboardFragment extends Fragment {
             }
         });
 
+
+        filtrocalificados.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filtroporvotantes();
+            }
+        });
+
         filtroestrellas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {filtroporpromedio();   }
+        });
+
+        filtroprovedores.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filtrousuarios();
+            }
         });
 
 
@@ -92,7 +112,6 @@ public class DashboardFragment extends Fragment {
         return root;
 
     }
-
 
 
 
@@ -166,11 +185,60 @@ public class DashboardFragment extends Fragment {
 
     }
 
+
+    private void filtroporvotantes() {
+
+        Query query = mFirestore.collection("servicio");
+
+
+        FirestoreRecyclerOptions<Servicio> firestoreRecyclerOptions =
+                new FirestoreRecyclerOptions.Builder<Servicio>()
+                        .setQuery(query.orderBy("votantes", Query.Direction.DESCENDING), Servicio.class).build();
+
+
+        mAdapter = new ServicioAdapterdasboard(firestoreRecyclerOptions,getActivity());
+        mAdapter.startListening();
+
+        mRecycler.setAdapter(mAdapter);
+    }
+
+
     private void filtroporpromedio() {
 
+        Query query = mFirestore.collection("servicio");
+
+
+        FirestoreRecyclerOptions<Servicio> firestoreRecyclerOptions =
+                new FirestoreRecyclerOptions.Builder<Servicio>()
+                        .setQuery(query.orderBy("estrellas", Query.Direction.DESCENDING), Servicio.class).build();
+
+
+        mAdapter = new ServicioAdapterdasboard(firestoreRecyclerOptions,getActivity());
+        mAdapter.startListening();
+
+        mRecycler.setAdapter(mAdapter);
 
 
     }
+
+    private void filtrousuarios() {
+        Query query = mFirestore.collection("user");
+
+
+        FirestoreRecyclerOptions<usuario> firestoreRecyclerOptions =
+                new FirestoreRecyclerOptions.Builder<usuario>()
+                        .setQuery(query.orderBy("nombre"), usuario.class).build();
+
+
+        nadapter = new usuarioAdapter(firestoreRecyclerOptions,getActivity());
+        nadapter.startListening();
+
+        mRecycler.setAdapter(nadapter);
+
+    }
+
+
+
 
     @Override
     public void onStart() {
@@ -187,7 +255,7 @@ public class DashboardFragment extends Fragment {
     public void onStop() {
         super.onStop();
         mAdapter.stopListening();
-    }
+          }
 
     @Override
     public void onDestroyView() {

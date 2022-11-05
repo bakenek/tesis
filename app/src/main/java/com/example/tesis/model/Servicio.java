@@ -9,10 +9,12 @@ public class Servicio {
 
     Double promedio;
     Double votantes;
+    Double estrellas;
 
     public Servicio(){}
 
-    public Servicio(String nombre, String descripcion, String iddelcreador, String fechaDeCreacion , String photo, Double promedio , Double votantes) {
+    public Servicio(String nombre, String descripcion, String iddelcreador,
+                    String fechaDeCreacion , String photo, Double promedio , Double votantes, Double estrellas) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.iddelcreador = iddelcreador;
@@ -20,6 +22,7 @@ public class Servicio {
         this.Photo = photo;
         this.promedio = promedio;
         this.votantes = votantes;
+        this.estrellas = estrellas;
     }
 
     public String getNombre() {
@@ -74,7 +77,9 @@ public class Servicio {
         this.votantes = votantes;
     }
 
+    public Double getEstrellas() {return estrellas;   }
 
+    public void setEstrellas(Double estrellas) { this.estrellas = estrellas; }
 
 
 }

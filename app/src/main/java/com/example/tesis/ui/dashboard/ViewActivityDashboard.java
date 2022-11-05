@@ -131,8 +131,6 @@ public class ViewActivityDashboard extends AppCompatActivity {
                                                        Double vot = documentSnapshot2.getDouble("votantes");
                                                        Double promedi, votant;
 
-                                                        Toast.makeText(ViewActivityDashboard.this, "voto" + voto, Toast.LENGTH_SHORT).show();
-
                                                         if(voto == true){
                                                             promedi = prom - ratingg + rati;
                                                             votant= vot;
@@ -149,11 +147,13 @@ public class ViewActivityDashboard extends AppCompatActivity {
                                                         }
 
 
-                                                        textviewpromedio.setText("Promedio : "+ promedi/votant);
+                                                        Double promedioestrellas = promedi/votant;
+                                                        textviewpromedio.setText("Promedio : "+ promedioestrellas);
 
                                                         Map<String,Object> p= new HashMap<>();
                                                         p.put("promedio", promedi);
                                                         p.put("votantes", votant);
+                                                        p.put("estrellas", promedioestrellas);
 
 
                                                         mFirestore.collection("servicio").document(id).update(p).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -204,8 +204,6 @@ public class ViewActivityDashboard extends AppCompatActivity {
     private void  getservvicio(String id){
 
         String FechaDeCreacionServicio,idcreador;
-
-
 
         mFirestore.collection("servicio").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override

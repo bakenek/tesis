@@ -143,27 +143,20 @@
             android:layout_width="match_parent"
             android:layout_height="10dp" />
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
+        <Button
+            android:id="@+id/btnborrarservicio"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:background="@color/purple_500"
-            android:backgroundTint="@color/purple_500"
-            app:cardCornerRadius="30dp">
-
-            <Button
-                android:id="@+id/btnborrarservicio"
-                android:layout_width="250dp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal"
-                android:background="@color/purple_500"
-                android:minHeight="48dp"
-                android:outlineAmbientShadowColor="@color/purple_500"
-                android:outlineSpotShadowColor="@color/purple_500"
-                android:text="Eliminar "
-                android:textColor="@color/white"
-                tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
-        </androidx.cardview.widget.CardView>
+            android:layout_gravity="center_horizontal"
+            android:background="@color/white"
+            android:backgroundTint="@color/white"
+            android:backgroundTintMode="add"
+            android:minHeight="48dp"
+            android:outlineAmbientShadowColor="@color/white"
+            android:outlineSpotShadowColor="@color/white"
+            android:text="Eliminar "
+            android:textColor="@color/purple_500"
+            tools:ignore="TouchTargetSizeCheck,TextContrastCheck" />
 
     </LinearLayout>
 

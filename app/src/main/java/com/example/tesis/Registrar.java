@@ -59,18 +59,8 @@ public class Registrar extends AppCompatActivity {
         btnregresar = (Button) findViewById(R.id.btnregresar);
 
 
-
-
         mAuth = FirebaseAuth.getInstance();
         mFirestore = FirebaseFirestore.getInstance();
-
-
-
-
-
-
-
-
 
             btnregresar.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -81,8 +71,6 @@ public class Registrar extends AppCompatActivity {
 
                 }
             });
-
-
 
 
 
@@ -121,6 +109,7 @@ public class Registrar extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
 
+                Double i = Double.valueOf(0);
                 String id = mAuth.getCurrentUser().getUid();
                 Map<String,Object> map = new HashMap<>();
                 map.put("id", id);
@@ -132,6 +121,9 @@ public class Registrar extends AppCompatActivity {
                 map.put("estudios","");
                 map.put("habilidades","");
                 map.put("intereses","");
+                map.put("promedio", i);
+                map.put("votantes", i);
+                map.put("estrellas", i);
 
 
                 Map<String,Object> notis = new HashMap<>();

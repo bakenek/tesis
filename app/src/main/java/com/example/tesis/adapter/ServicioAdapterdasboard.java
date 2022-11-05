@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,8 +26,6 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.squareup.picasso.Picasso;
 
 public class ServicioAdapterdasboard extends FirestoreRecyclerAdapter<Servicio, ServicioAdapterdasboard.ViewHolder> {
-
-
 
 
     FirebaseAuth mAuth;
@@ -54,8 +53,9 @@ public class ServicioAdapterdasboard extends FirestoreRecyclerAdapter<Servicio, 
         holder.nombre.setText(model.getNombre());
         holder.descripcion.setText(model.getDescripcion());
         String fotoservicio = model.getPhoto();
-        Double promedio = model.getPromedio();
-        Double votantes = model.getVotantes();
+        Double estrellas = model.getEstrellas();
+        Float prom = estrellas.floatValue();
+        holder.ratingBar.setRating(prom);
 
 
 
@@ -105,6 +105,7 @@ public class ServicioAdapterdasboard extends FirestoreRecyclerAdapter<Servicio, 
 
         TextView nombre,descripcion;
         ImageView fotodelservico;
+        RatingBar ratingBar;
 
         View d;
 
@@ -117,6 +118,7 @@ public class ServicioAdapterdasboard extends FirestoreRecyclerAdapter<Servicio, 
             fotodelservico = itemView.findViewById(R.id.fotodelservicio);
             nombre = itemView.findViewById(R.id.nombremiservicio);
             descripcion = itemView.findViewById(R.id.descipcionmiservicio);
+            ratingBar = itemView.findViewById(R.id.ratingBarsingle);
 
 
             d =itemView;

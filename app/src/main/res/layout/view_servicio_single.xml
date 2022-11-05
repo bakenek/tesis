@@ -64,6 +64,16 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 android:textColor="@color/purple_500" />
 
+            <RatingBar
+                android:id="@+id/ratingBarsingle"
+                style="@style/Widget.AppCompat.RatingBar.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:progressTint="@color/purple_500"
+                android:rating="0"
+                tools:ignore="SpeakableTextPresentCheck" />
+
             <TextView
                 android:id="@+id/descipcionmiservicio"
                 android:layout_width="match_parent"
