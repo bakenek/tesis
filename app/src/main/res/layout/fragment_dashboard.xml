@@ -64,17 +64,20 @@
                     <androidx.cardview.widget.CardView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         app:cardCornerRadius="300dp">
 
                         <Button
                             android:id="@+id/buttonprueba"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@color/fondo"
-                            android:backgroundTint="@color/fondo"
+                            android:layout_height="35dp"
+                            android:background="@color/white"
+                            android:backgroundTint="@color/white"
                             android:backgroundTintMode="add"
                             android:text="Fecha"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textColor="#787676"
+                            tools:ignore="TextContrastCheck,TouchTargetSizeCheck" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -90,15 +93,17 @@
 
                         <Button
                             android:id="@+id/filtrocalificados"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/fondo"
-                            android:backgroundTint="@color/fondo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:background="@color/white"
+                            android:backgroundTint="@color/white"
                             android:backgroundTintMode="add"
                             android:paddingLeft="7dp"
                             android:paddingRight="7dp"
                             android:text="Mas calificados"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textColor="#787676"
+                            tools:ignore="TouchTargetSizeCheck" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -114,15 +119,17 @@
 
                         <Button
                             android:id="@+id/filtrosolicitados"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/fondo"
-                            android:backgroundTint="@color/fondo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:background="@color/white"
+                            android:backgroundTint="@color/white"
                             android:backgroundTintMode="screen"
                             android:paddingLeft="7dp"
                             android:paddingRight="7dp"
                             android:text="Mas Soliciatos"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textColor="#787676"
+                            tools:ignore="TouchTargetSizeCheck" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -140,15 +147,16 @@
 
                         <Button
                             android:id="@+id/filtroestrellas"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/fondo"
-                            android:backgroundTint="@color/fondo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:background="@color/white"
+                            android:backgroundTint="@color/white"
                             android:backgroundTintMode="add"
                             android:paddingLeft="7dp"
                             android:paddingRight="7dp"
                             android:text="Mas Estrellas"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textColor="#787676" />
 
                     </androidx.cardview.widget.CardView>
 
@@ -163,15 +171,16 @@
 
                         <Button
                             android:id="@+id/filtrousuarios"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:background="@color/fondo"
-                            android:backgroundTint="@color/fondo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:background="@color/white"
+                            android:backgroundTint="@color/white"
                             android:backgroundTintMode="add"
                             android:paddingLeft="7dp"
                             android:paddingRight="7dp"
                             android:text="Provedores"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+                            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                            android:textColor="#787676" />
 
                     </androidx.cardview.widget.CardView>
 
