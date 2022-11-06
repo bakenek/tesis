@@ -139,9 +139,19 @@ public class User extends AppCompatActivity {
                                                                         "Diste "+ rati + " estrellas", Toast.LENGTH_SHORT).show();
                                                             }
 
+                                                            int votam = vot.intValue();
+                                                            String plural;
+
+                                                            if (votam == 1){
+                                                                plural = " voto";
+                                                            }
+                                                            else{
+                                                                plural = " votos";
+                                                            }
 
                                                             Double promedioestrellas = promedi/votant;
-                                                            textviewpromedio.setText("Promedio : "+ promedioestrellas);
+                                                            textviewpromedio.setText("Promedio : "+ promedioestrellas
+                                                                    + " de " + votam + plural );
 
                                                             Map<String,Object> p= new HashMap<>();
                                                             p.put("promedio", promedi);
@@ -217,7 +227,7 @@ public class User extends AppCompatActivity {
                     String contactouser = documentSnapshot.getString("contacto");
                     String estudiosuser= documentSnapshot.getString("estudios");
                     String habilidadesuser = documentSnapshot.getString("habilidades");
-                    String interesesuser = documentSnapshot.getString("estudios");
+                    String interesesuser = documentSnapshot.getString("intereses");
 
 
                     nombre.setText(usuario);

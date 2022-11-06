@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -21,6 +22,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
@@ -35,11 +37,13 @@ public class ViewActivityDashboard extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseFirestore mFirestore;
 
-    Double ratingg;
-    Boolean voto;
+    Button solicitar;
 
-    String creadorid;
-    Double promedio , votante ;
+    Double ratingg;
+    Boolean voto , solicito;
+
+    String creadorid , serviname ;
+    Double promedio , votante , solicitantes ;
 
    private RatingBar ratingBar;
 
@@ -64,6 +68,8 @@ public class ViewActivityDashboard extends AppCompatActivity {
         imageView = findViewById(R.id.imageViewserviciovista);
        ratingBar = findViewById(R.id.ratingBarServicio);
 
+       solicitar = findViewById(R.id.buttonsolicitar);
+
 
         if (id == null || id == "") {
 
@@ -72,6 +78,14 @@ public class ViewActivityDashboard extends AppCompatActivity {
 
         } else {
             getservvicio(id);
+
+
+            solicitar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    solicitar(id);
+                }
+            });
 
 
             usuario.setOnClickListener(new View.OnClickListener() {
@@ -97,13 +111,18 @@ public class ViewActivityDashboard extends AppCompatActivity {
                 Double rati = Double.valueOf(rating);
 
 
+                if (solicito == true){}
+                else if(solicito == false){}
+                else if(solicito == null){solicito = false;}
+                else{ solicito = false;}
+
                 Map<String,Object> map = new HashMap<>();
                 map.put("idEstrella", idEstrella);
                 map.put("idservicio", id);
                 map.put("idusuario", idusuario);
                 map.put("rating", rati);
                 map.put("voto", true);
-
+                map.put("solicito", solicito);
 
 
                 mFirestore.collection("estrellas").document(idEstrella).set(map).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -129,7 +148,9 @@ public class ViewActivityDashboard extends AppCompatActivity {
 
                                                        Double prom = documentSnapshot2.getDouble("promedio");
                                                        Double vot = documentSnapshot2.getDouble("votantes");
+
                                                        Double promedi, votant;
+
 
                                                         if(voto == true){
                                                             promedi = prom - ratingg + rati;
@@ -147,8 +168,19 @@ public class ViewActivityDashboard extends AppCompatActivity {
                                                         }
 
 
+                                                        int votam = votant.intValue();
+                                                        String plural;
+
+                                                        if (votam == 1){
+                                                            plural = " voto";
+                                                        }
+                                                        else{
+                                                            plural = " votos";
+                                                        }
+
                                                         Double promedioestrellas = promedi/votant;
-                                                        textviewpromedio.setText("Promedio : "+ promedioestrellas);
+                                                        textviewpromedio.setText("Promedio : "+ promedioestrellas
+                                                                + " de " + votam + plural );
 
                                                         Map<String,Object> p= new HashMap<>();
                                                         p.put("promedio", promedi);
@@ -199,6 +231,114 @@ public class ViewActivityDashboard extends AppCompatActivity {
 
     }
 
+    private void solicitar(String id) {
+
+            String idusuario = mAuth.getCurrentUser().getUid();
+            String idEstrella = id + idusuario;
+
+
+                    mFirestore.collection("estrellas").document(idEstrella).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                            mFirestore.collection("servicio").document(id).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+
+                                    if (task.isSuccessful()) {
+                                        DocumentSnapshot document = task.getResult();
+                                        if (document.exists()) {
+
+                                            mFirestore.collection("servicio").document(id).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                @Override
+                                                public void onSuccess(DocumentSnapshot documentSnapshot2) {
+
+                                                    Double vot = documentSnapshot2.getDouble("solicitantes");
+                                                    Double  solicitantes;
+
+                                                    if(solicito == true){
+                                                        solicitantes= vot;
+
+                                                        Toast.makeText(ViewActivityDashboard.this, "El usuario ya fue notificado", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                    else{
+                                                        solicitantes= vot + 1;
+
+
+                                                        Toast.makeText(ViewActivityDashboard.this,
+                                                                  "Notificaremos al creador", Toast.LENGTH_SHORT).show();
+
+
+                                                        mFirestore.collection("user").document(creadorid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                            @Override
+                                                            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                                                String nombreCreador = documentSnapshot.getString("nombre");
+
+                                                                Map<String,Object> notis = new HashMap<>();
+
+                                                                notis.put("idnotificado", creadorid);
+                                                                notis.put("titulo", nombreCreador +" muestra interes");
+                                                                notis.put("cuerpo",nombreCreador + " solicito el servicio " + serviname   );
+
+
+                                                                mFirestore.collection("notificaciones").add(notis).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                                                    @Override
+                                                                    public void onSuccess(DocumentReference documentReference) {
+
+
+                                                                    }
+                                                                });
+
+
+
+                                                            }
+                                                        });
+
+
+
+                                                    }
+
+                                                    Map<String,Object> p= new HashMap<>();
+                                                    p.put("solicitantes", solicitantes);
+
+
+
+                                                    mFirestore.collection("servicio").document(id).update(p).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void unused) { solicito = true;
+
+                                                            Map<String,Object> e= new HashMap<>();
+                                                            e.put("solicito",true);
+
+                                                        mFirestore.collection("estrellas")
+                                                                .document(idEstrella).update(e).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                    @Override
+                                                                    public void onSuccess(Void unused) {
+
+                                                                    }
+                                                                });
+
+                                                        }
+                                                    }).addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception e) {
+                                                        }
+                                                    });
+                                                }
+                                            });
+
+                                        }
+                                    }else{
+
+                                    }
+                                }
+                            });
+                        }
+                    });
+        }
+
+
+
 
 
     private void  getservvicio(String id){
@@ -213,9 +353,11 @@ public class ViewActivityDashboard extends AppCompatActivity {
                 String FechaDeCreacionServicio = documentSnapshot.getString("FechaDeCreacion");
                 String idcreador = documentSnapshot.getString("iddelcreador");
                 String fotoservicio = documentSnapshot.getString("Photo");
+                solicitantes = documentSnapshot.getDouble("solicitantes");
                 String idusuario = mAuth.getCurrentUser().getUid();
                 String idEstrella = id + idusuario;
                 creadorid = idcreador;
+                serviname = nombreServicio;
 
 
 
@@ -234,22 +376,20 @@ public class ViewActivityDashboard extends AppCompatActivity {
 
                                         estrellas =documentSnapshot2.getDouble("rating");
                                         voto = documentSnapshot2.getBoolean("voto");
+                                        solicito = documentSnapshot2.getBoolean("solicito");
 
                                         float setratin = estrellas.floatValue();
                                         Float object = setratin;
-
 
                                         if (object != null) {
                                             setratin = estrellas.floatValue();
                                             ratingBar.setRating(setratin);
                                             ratingg = Double.valueOf(setratin);
-                                        } else {
 
+                                        } else {
                                             ratingBar.setRating(0.0F);
                                             ratingg = 0.0;
                                         }
-
-
 
 
                                     }
@@ -262,8 +402,10 @@ public class ViewActivityDashboard extends AppCompatActivity {
                                 mep.put("idusuario", idusuario);
                                 mep.put("rating", i);
                                 mep.put("voto", false);
+                                mep.put("solicito", false);
 
 
+                                solicito = false;
                                 voto = false;
                                 ratingBar.setRating(0.0F);
                                 ratingg = Double.valueOf(i);
@@ -317,6 +459,7 @@ public class ViewActivityDashboard extends AppCompatActivity {
                         String nombreCreador = documentSnapshot.getString("nombre");
                         String contactoCreador = documentSnapshot.getString("contacto");
                         String correoCreador = documentSnapshot.getString("correo");
+
 
                         usuario.setText(nombreCreador);
                         textviewgeneral.setText(  "Correo: " +  correoCreador + "\n"

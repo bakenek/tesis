@@ -106,7 +106,7 @@
             android:outlineSpotShadowColor="@color/white"
             android:shadowColor="#FFFFFF"
             android:text="Crear cuenta"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textColor="@color/purple_500"
             tools:ignore="TouchTargetSizeCheck" />
     </LinearLayout>

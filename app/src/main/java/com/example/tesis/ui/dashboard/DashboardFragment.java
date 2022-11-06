@@ -72,13 +72,16 @@ public class DashboardFragment extends Fragment {
         filtroestrellas = root.findViewById(R.id.filtroestrellas);
         filtrocalificados = root.findViewById(R.id.filtrocalificados);
         filtroprovedores = root.findViewById(R.id.filtrousuarios);
-
-
-
-
+        filtrosolicitados = root.findViewById(R.id.filtrosolicitados);
 
         setUApRecyclerView(root);
         search_View();
+
+
+        filtrosolicitados.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {filtrosolicitados();    }
+        });
 
         prueba.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +115,7 @@ public class DashboardFragment extends Fragment {
         return root;
 
     }
+
 
 
 
@@ -220,6 +224,24 @@ public class DashboardFragment extends Fragment {
 
 
     }
+
+
+    private void filtrosolicitados() {
+        Query query = mFirestore.collection("servicio");
+
+        FirestoreRecyclerOptions<Servicio> firestoreRecyclerOptions =
+                new FirestoreRecyclerOptions.Builder<Servicio>()
+                        .setQuery(query.orderBy("solicitantes", Query.Direction.DESCENDING), Servicio.class).build();
+
+
+        mAdapter = new ServicioAdapterdasboard(firestoreRecyclerOptions,getActivity());
+        mAdapter.startListening();
+
+        mRecycler.setAdapter(mAdapter);
+
+
+    }
+
 
     private void filtrousuarios() {
         Query query = mFirestore.collection("user");

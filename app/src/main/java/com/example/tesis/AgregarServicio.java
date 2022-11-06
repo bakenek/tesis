@@ -362,6 +362,7 @@ public class AgregarServicio extends AppCompatActivity {
         map.put("promedio", i);
         map.put("votantes", i);
         map.put("estrellas", i);
+        map.put("solicitantes", i);
 
 
 

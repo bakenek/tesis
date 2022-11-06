@@ -116,7 +116,7 @@ public class HomeFragment extends Fragment {
                     String contactouser = documentSnapshot.getString("contacto");
                     String estudiosuser= documentSnapshot.getString("estudios");
                     String habilidadesuser = documentSnapshot.getString("habilidades");
-                    String interesesuser = documentSnapshot.getString("estudios");
+                    String interesesuser = documentSnapshot.getString("intereses");
 
                     nombre.setText(usuario);
                     correo.setText(correouser);
