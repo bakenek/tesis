@@ -130,6 +130,7 @@ public class AgregarServicio extends AppCompatActivity {
 
         }else{
 
+            getSupportActionBar().setTitle(" Servicio");
             CrearServicio.setText("Actualizar Servicio");
             getservvicio(id);
 
@@ -142,6 +143,7 @@ public class AgregarServicio extends AppCompatActivity {
                     mFirestore.collection("servicio").document(idservicio).update(map);
 
                     Toast.makeText(AgregarServicio.this,"Foto eliminada", Toast.LENGTH_SHORT).show();
+
                 }
             });
 
@@ -282,6 +284,44 @@ public class AgregarServicio extends AppCompatActivity {
                                 Toast.makeText(AgregarServicio.this, "Foto Actualizada", Toast.LENGTH_SHORT).show();
 
                                 progressBar.setVisibility(View.INVISIBLE);
+
+                                mFirestore.collection("servicio").document(idservicio).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+                                        String fotoServi = documentSnapshot.getString("Photo");
+
+                                        try {
+                                            if(!fotoServi.equals("")){
+
+                                                Picasso.with(AgregarServicio.this)
+                                                        .load(fotoServi)
+                                                        .resize(150,150)
+                                                        .into(fotoservicio);
+
+                                            }
+
+                                        }catch (Exception e){
+                                            Log.v("Error", "e: "+ e);
+
+
+                                        }
+
+
+
+
+
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(AgregarServicio.this, "Error al Obtener los Datos", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+
+
+
+
                             }
                         });
 

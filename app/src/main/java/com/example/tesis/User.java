@@ -139,7 +139,7 @@ public class User extends AppCompatActivity {
                                                                         "Diste "+ rati + " estrellas", Toast.LENGTH_SHORT).show();
                                                             }
 
-                                                            int votam = vot.intValue();
+                                                            int votam = votant.intValue();
                                                             String plural;
 
                                                             if (votam == 1){
@@ -229,6 +229,22 @@ public class User extends AppCompatActivity {
                     String habilidadesuser = documentSnapshot.getString("habilidades");
                     String interesesuser = documentSnapshot.getString("intereses");
 
+
+                    Double votant = documentSnapshot.getDouble("votantes");
+                    Double prom = documentSnapshot.getDouble("estrellas");
+
+                    int votam = votant.intValue();
+                    String plural;
+
+                    if (votam == 1){
+                        plural = " voto";
+                    }
+                    else{
+                        plural = " votos";
+                    }
+
+                    textviewpromedio.setText("Promedio : "+ prom
+                            + " de " + votam + plural );
 
                     nombre.setText(usuario);
                     correo.setText(correouser);

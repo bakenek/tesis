@@ -167,7 +167,6 @@ public class ViewActivityDashboard extends AppCompatActivity {
                                                                     "Diste "+ rati + " estrellas", Toast.LENGTH_SHORT).show();
                                                         }
 
-
                                                         int votam = votant.intValue();
                                                         String plural;
 
@@ -359,6 +358,23 @@ public class ViewActivityDashboard extends AppCompatActivity {
                 creadorid = idcreador;
                 serviname = nombreServicio;
 
+                Double votant = documentSnapshot.getDouble("votantes");
+                Double prom = documentSnapshot.getDouble("estrellas");
+
+                int votam = votant.intValue();
+                String plural;
+
+                if (votam == 1){
+                    plural = " voto";
+                }
+                else{
+                    plural = " votos";
+                }
+
+                textviewpromedio.setText("Promedio : "+ prom
+                        + " de " + votam + plural );
+
+
 
 
                 mFirestore.collection("estrellas").document(idEstrella).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -461,10 +477,13 @@ public class ViewActivityDashboard extends AppCompatActivity {
                         String correoCreador = documentSnapshot.getString("correo");
 
 
+
+
                         usuario.setText(nombreCreador);
                         textviewgeneral.setText(  "Correo: " +  correoCreador + "\n"
-                                + "Contacto: " + contactoCreador  + "\n" + "Fecha de publicacion: " + FechaDeCreacionServicio
-                        );
+                                + "Contacto: " + contactoCreador
+                                + "\n"  + "Solicitado por " +solicitantes + " usuarios"
+                                + "\n" + "Fecha de publicacion: " + FechaDeCreacionServicio );
 
                     }
                 });
