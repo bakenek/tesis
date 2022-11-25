@@ -405,13 +405,12 @@ public class AgregarServicio extends AppCompatActivity {
         map.put("solicitantes", i);
 
 
-
         Map<String,Object> notis = new HashMap<>();
 
         notis.put("idnotificado", id);
         notis.put("titulo", "Creaste un servicio");
         notis.put("cuerpo","El Servicio: " + nombreServicio + ", fue creado con exito." );
-
+        notis.put("fecha", date);
 
 
 

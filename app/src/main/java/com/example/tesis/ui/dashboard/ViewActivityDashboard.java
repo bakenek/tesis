@@ -27,7 +27,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class ViewActivityDashboard extends AppCompatActivity {
@@ -268,16 +271,17 @@ public class ViewActivityDashboard extends AppCompatActivity {
                                                                   "Notificaremos al creador", Toast.LENGTH_SHORT).show();
 
 
-                                                        mFirestore.collection("user").document(creadorid).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                                        mFirestore.collection("user").document(idusuario).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                                                             @Override
                                                             public void onSuccess(DocumentSnapshot documentSnapshot) {
                                                                 String nombreCreador = documentSnapshot.getString("nombre");
-
+                                                                String date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
                                                                 Map<String,Object> notis = new HashMap<>();
 
                                                                 notis.put("idnotificado", creadorid);
                                                                 notis.put("titulo", nombreCreador +" muestra interes");
-                                                                notis.put("cuerpo",nombreCreador + " solicito el servicio " + serviname   );
+                                                                notis.put("cuerpo",nombreCreador + " solicito el servicio " + serviname );
+                                                                notis.put("fecha", date);
 
 
                                                                 mFirestore.collection("notificaciones").add(notis).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

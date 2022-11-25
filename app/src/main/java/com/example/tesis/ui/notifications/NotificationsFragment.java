@@ -59,7 +59,7 @@ public class NotificationsFragment extends Fragment {
 
 
         FirestoreRecyclerOptions<notificaciones> firestoreRecyclerOptions = new FirestoreRecyclerOptions.Builder
-                <notificaciones>().setQuery(query.orderBy("idnotificado").startAt(b).endAt(b), notificaciones.class).build();
+                <notificaciones>().setQuery(query.whereEqualTo("idnotificado",b).orderBy("fecha", Query.Direction.DESCENDING), notificaciones.class).build();
 
         mAdapter = new notificacionesAdapter(firestoreRecyclerOptions);
         mAdapter.notifyDataSetChanged();

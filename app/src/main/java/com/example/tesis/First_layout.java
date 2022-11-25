@@ -67,12 +67,16 @@ public class First_layout extends AppCompatActivity {
 
                 if(emailuser.isEmpty() && pasword.isEmpty()){
 
-                    Toast.makeText(First_layout.this,"Complete los datos " +
-                            cajauser.getText().toString(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(First_layout.this,"Complete los datos " ,Toast.LENGTH_SHORT).show();
 
 
                 }else {
-                    loginUser(emailuser,pasword);
+                    if (emailuser.isEmpty() || pasword.isEmpty()){
+                        Toast.makeText(First_layout.this,"Complete los datos ",Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        loginUser(emailuser,pasword);
+                    }
 
                 }
 
@@ -110,8 +114,7 @@ public class First_layout extends AppCompatActivity {
 
               }else{
 
-                  Toast.makeText(First_layout.this,"Error" +
-                          cajauser.getText().toString(),Toast.LENGTH_SHORT).show();
+                  Toast.makeText(First_layout.this,"correo o contraseña invalidos",Toast.LENGTH_SHORT).show();
 
               }
 
@@ -120,8 +123,6 @@ public class First_layout extends AppCompatActivity {
           @Override
           public void onFailure(@NonNull Exception e) {
 
-              Toast.makeText(First_layout.this,"Error al iniciar sesion " +
-                      cajauser.getText().toString(),Toast.LENGTH_SHORT).show();
           }
       });
 

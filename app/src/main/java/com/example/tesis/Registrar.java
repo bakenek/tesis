@@ -29,7 +29,10 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class Registrar extends AppCompatActivity {
@@ -86,6 +89,8 @@ public class Registrar extends AppCompatActivity {
                     String pasword = cajapwd.getText().toString().trim();
                     String contacto = cajacontacto.getText().toString().trim();
 
+
+
                     if (emailuser.isEmpty() && pasword.isEmpty() && nameuser.isEmpty() && contacto.isEmpty()) {
 
                         Toast.makeText(Registrar.this, "Complete los datos " +
@@ -93,7 +98,13 @@ public class Registrar extends AppCompatActivity {
 
                     } else {
 
-                        registerUser(nameuser, emailuser, pasword, contacto);
+
+                        if(pasword.length() >= 6) {
+
+                            registerUser(nameuser, emailuser, pasword, contacto);
+
+                        }else{Toast.makeText(Registrar.this, "la clave no puede ser menor de 6 letras "
+                                , Toast.LENGTH_SHORT).show();}
 
                     }
                 }
@@ -126,11 +137,13 @@ public class Registrar extends AppCompatActivity {
                 map.put("estrellas", i);
 
 
+                String date = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date());
                 Map<String,Object> notis = new HashMap<>();
 
                 notis.put("idnotificado", id);
                 notis.put("titulo", "Bienvenido " + nameuser);
                 notis.put("cuerpo","Te damos la bienvenida " + nameuser +", gracias por unirte a Clicking" );
+                notis.put("fecha", date);
 
                 mFirestore.collection("user").document(id).set(map)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -147,8 +160,8 @@ public class Registrar extends AppCompatActivity {
                         });
 
 
-                        Toast.makeText(Registrar.this,"Usuario registrado " +
-                                cajauser.getText().toString(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(Registrar.this,"Usuario " +
+                                cajauser.getText().toString() + "  registrado exitosamente",Toast.LENGTH_SHORT).show();
 
                         finish();
                         startActivity(new Intent(Registrar.this,sobreti.class));

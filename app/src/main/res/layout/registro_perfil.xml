@@ -69,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:ems="10"
-            android:hint="Clave"
+            android:hint="Clave (minimo de letras 6)"
             android:inputType="textPassword"
             android:minHeight="48dp" />
 

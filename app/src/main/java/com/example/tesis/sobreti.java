@@ -190,6 +190,36 @@ public class sobreti extends AppCompatActivity {
                                 Toast.makeText(sobreti.this, "Foto Actualizada", Toast.LENGTH_SHORT).show();
 
                                 progressBar.setVisibility(View.INVISIBLE);
+
+                                mFirestore.collection("user").document(idd).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                                    @Override
+                                    public void onSuccess(DocumentSnapshot documentSnapshot) {
+
+                                        String fotouser = documentSnapshot.getString("Photo");
+
+
+                                        try {
+                                            if(!fotouser.equals("")){
+
+                                                Picasso.with(sobreti.this)
+                                                        .load(fotouser)
+                                                        .resize(150,150)
+                                                        .into(usuariofoto);
+
+                                            }
+                                        }catch (Exception e){
+                                            Log.v("Error", "e: "+ e);
+                                            Toast.makeText(sobreti.this,"Error", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(sobreti.this, "Error al Obtener los Datos", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
                             }
                         });
 
