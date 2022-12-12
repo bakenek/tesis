@@ -1,19 +1,14 @@
 package com.example.tesis;
 
-import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,10 +19,6 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -96,13 +87,25 @@ public class Registrar extends AppCompatActivity {
                         Toast.makeText(Registrar.this, "Complete los datos " +
                                 cajauser.getText().toString(), Toast.LENGTH_SHORT).show();
 
+                    }
+                    else if (emailuser.isEmpty() || pasword.isEmpty() || nameuser.isEmpty() || contacto.isEmpty()) {
+
+                        Toast.makeText(Registrar.this, "Complete los datos " +
+                                cajauser.getText().toString(), Toast.LENGTH_SHORT).show();
+
                     } else {
 
 
                         if(pasword.length() >= 6) {
 
-                            registerUser(nameuser, emailuser, pasword, contacto);
+                            if(validaremail(emailuser)) {
+                                registerUser(nameuser, emailuser, pasword, contacto);
 
+                            }else{
+                                Toast.makeText(Registrar.this, "El correo no es valido"
+                                        , Toast.LENGTH_SHORT).show();
+
+                            }
                         }else{Toast.makeText(Registrar.this, "la clave no puede ser menor de 6 letras "
                                 , Toast.LENGTH_SHORT).show();}
 
@@ -113,6 +116,18 @@ public class Registrar extends AppCompatActivity {
 
         }
 
+    private boolean validaremail(String emailuser) {
+        if(!emailuser.isEmpty() && Patterns.EMAIL_ADDRESS.matcher(emailuser).matches()){
+
+            return true;
+
+        }else{
+            return false;
+
+        }
+
+
+    }
 
 
     public void registerUser(String nameuser, String emailuser, String pasword, String contacto) {
